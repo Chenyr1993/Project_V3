@@ -1,0 +1,1309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Project_V3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserSN" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="10" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Auth">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AuthName" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" />
+          <Property Name="MemberSN" Type="int" Nullable="false" />
+          <Property Name="StoreSN" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Delivery">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Method" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GroupBuying">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="StoreSN" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Startdate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedPerson" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="RequireDate" Type="datetime" Nullable="false" />
+          <Property Name="CloseDate" Type="datetime" Nullable="false" />
+          <Property Name="ShipAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeliverySN" Type="int" Nullable="false" />
+          <Property Name="LimitMoney" Type="money" />
+          <Property Name="LimitNumber" Type="int" />
+          <Property Name="Continued" Type="bit" Nullable="false" />
+          <Property Name="PaySN" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Manage">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeSN" Type="int" Nullable="false" />
+          <Property Name="Details" Type="nvarchar" MaxLength="150" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="DealDate" Type="datetime" />
+          <Property Name="AdminSN" Type="int" />
+          <Property Name="MemberSN" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserSN" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orderdetails">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="ProductSN" Type="int" Nullable="false" />
+          <Property Name="Quanity" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="money" Nullable="false" />
+          <Property Name="Discount" Type="int" />
+          <Property Name="Subtotal" Type="money" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="PaySN" Type="int" Nullable="false" />
+          <Property Name="Payed" Type="bit" Nullable="false" />
+          <Property Name="CustomerSN" Type="int" Nullable="false" />
+          <Property Name="GroupBuyingID" Type="nvarchar" MaxLength="13" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PayType">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Method" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProblemType">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Stock" Type="int" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="UnitPrice" Type="money" Nullable="false" />
+          <Property Name="Discontinued" Type="bit" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="PhotoType" Type="nvarchar" MaxLength="10" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CategorySN" Type="int" Nullable="false" />
+          <Property Name="StoreSN" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stores">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminSN" Type="int" Nullable="false" />
+          <Property Name="MemberSN" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Status" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Account" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="AuthSN" Type="int" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Admin__UserSN__2C3393D0">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="UserSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__StoreS__398D8EEE">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="MemberSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__StoreS__3A81B327">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="StoreSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupBuyi__Creat__48CFD27E">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="GroupBuying" Type="Self.GroupBuying" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="GroupBuying">
+              <PropertyRef Name="CreatedPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupBuyi__Deliv__49C3F6B7">
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GroupBuying" Type="Self.GroupBuying" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delivery">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="GroupBuying">
+              <PropertyRef Name="DeliverySN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupBuyi__PaySN__46E78A0C">
+          <End Role="PayType" Type="Self.PayType" Multiplicity="1" />
+          <End Role="GroupBuying" Type="Self.GroupBuying" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayType">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="GroupBuying">
+              <PropertyRef Name="PaySN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupBuyi__Store__47DBAE45">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="1" />
+          <End Role="GroupBuying" Type="Self.GroupBuying" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="GroupBuying">
+              <PropertyRef Name="StoreSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Manage__AdminSN__31EC6D26">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Manage" Type="Self.Manage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Manage">
+              <PropertyRef Name="AdminSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Manage__MemberSN__30F848ED">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Manage" Type="Self.Manage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Manage">
+              <PropertyRef Name="MemberSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Manage__TypeSN__32E0915F">
+          <End Role="ProblemType" Type="Self.ProblemType" Multiplicity="1" />
+          <End Role="Manage" Type="Self.Manage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProblemType">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Manage">
+              <PropertyRef Name="TypeSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Members__Address__29572725">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Members" Type="Self.Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Members">
+              <PropertyRef Name="UserSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orderdeta__Order__5165187F">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Orderdetails" Type="Self.Orderdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orderdetails">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orderdeta__Produ__52593CB8">
+          <End Role="Products" Type="Self.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orderdetails" Type="Self.Orderdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Orderdetails">
+              <PropertyRef Name="ProductSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__Customer__4E88ABD4">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CustomerSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__GroupBuy__4D94879B">
+          <End Role="GroupBuying" Type="Self.GroupBuying" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupBuying">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="GroupBuyingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__PaySN__4CA06362">
+          <End Role="PayType" Type="Self.PayType" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayType">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PaySN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__Catego__3F466844">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategorySN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__StoreS__403A8C7D">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="StoreSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stores__MemberSN__36B12243">
+          <End Role="Members" Type="Self.Members" Multiplicity="0..1" />
+          <End Role="Stores" Type="Self.Stores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Stores">
+              <PropertyRef Name="MemberSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stores__Status__35BCFE0A">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="Stores" Type="Self.Stores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Stores">
+              <PropertyRef Name="AdminSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__AuthSN__267ABA7A">
+          <End Role="Auth" Type="Self.Auth" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auth">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="AuthSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Project_V3ModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Auth" EntityType="Self.Auth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Delivery" EntityType="Self.Delivery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupBuying" EntityType="Self.GroupBuying" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manage" EntityType="Self.Manage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orderdetails" EntityType="Self.Orderdetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayType" EntityType="Self.PayType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProblemType" EntityType="Self.ProblemType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Admin__UserSN__2C3393D0" Association="Self.FK__Admin__UserSN__2C3393D0">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__StoreS__398D8EEE" Association="Self.FK__Comments__StoreS__398D8EEE">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__StoreS__3A81B327" Association="Self.FK__Comments__StoreS__3A81B327">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupBuyi__Creat__48CFD27E" Association="Self.FK__GroupBuyi__Creat__48CFD27E">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="GroupBuying" EntitySet="GroupBuying" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupBuyi__Deliv__49C3F6B7" Association="Self.FK__GroupBuyi__Deliv__49C3F6B7">
+            <End Role="Delivery" EntitySet="Delivery" />
+            <End Role="GroupBuying" EntitySet="GroupBuying" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupBuyi__PaySN__46E78A0C" Association="Self.FK__GroupBuyi__PaySN__46E78A0C">
+            <End Role="PayType" EntitySet="PayType" />
+            <End Role="GroupBuying" EntitySet="GroupBuying" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupBuyi__Store__47DBAE45" Association="Self.FK__GroupBuyi__Store__47DBAE45">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="GroupBuying" EntitySet="GroupBuying" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Manage__AdminSN__31EC6D26" Association="Self.FK__Manage__AdminSN__31EC6D26">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Manage" EntitySet="Manage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Manage__MemberSN__30F848ED" Association="Self.FK__Manage__MemberSN__30F848ED">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Manage" EntitySet="Manage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Manage__TypeSN__32E0915F" Association="Self.FK__Manage__TypeSN__32E0915F">
+            <End Role="ProblemType" EntitySet="ProblemType" />
+            <End Role="Manage" EntitySet="Manage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Members__Address__29572725" Association="Self.FK__Members__Address__29572725">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orderdeta__Order__5165187F" Association="Self.FK__Orderdeta__Order__5165187F">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Orderdetails" EntitySet="Orderdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orderdeta__Produ__52593CB8" Association="Self.FK__Orderdeta__Produ__52593CB8">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Orderdetails" EntitySet="Orderdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__Customer__4E88ABD4" Association="Self.FK__Orders__Customer__4E88ABD4">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__GroupBuy__4D94879B" Association="Self.FK__Orders__GroupBuy__4D94879B">
+            <End Role="GroupBuying" EntitySet="GroupBuying" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__PaySN__4CA06362" Association="Self.FK__Orders__PaySN__4CA06362">
+            <End Role="PayType" EntitySet="PayType" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__Catego__3F466844" Association="Self.FK__Products__Catego__3F466844">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__StoreS__403A8C7D" Association="Self.FK__Products__StoreS__403A8C7D">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stores__MemberSN__36B12243" Association="Self.FK__Stores__MemberSN__36B12243">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Stores" EntitySet="Stores" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stores__Status__35BCFE0A" Association="Self.FK__Stores__Status__35BCFE0A">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Stores" EntitySet="Stores" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__AuthSN__267ABA7A" Association="Self.FK__Users__AuthSN__267ABA7A">
+            <End Role="Auth" EntitySet="Auth" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Project_V3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserSN" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Extension" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Admin__UserSN__2C3393D0" FromRole="Admin" ToRole="Users" />
+          <NavigationProperty Name="Manage" Relationship="Self.FK__Manage__AdminSN__31EC6D26" FromRole="Admin" ToRole="Manage" />
+          <NavigationProperty Name="Stores" Relationship="Self.FK__Stores__Status__35BCFE0A" FromRole="Admin" ToRole="Stores" />
+        </EntityType>
+        <EntityType Name="Auth">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AuthName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__AuthSN__267ABA7A" FromRole="Auth" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Catego__3F466844" FromRole="Category" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+          <Property Name="MemberSN" Type="Int32" Nullable="false" />
+          <Property Name="StoreSN" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Members" Relationship="Self.FK__Comments__StoreS__398D8EEE" FromRole="Comments" ToRole="Members" />
+          <NavigationProperty Name="Stores" Relationship="Self.FK__Comments__StoreS__3A81B327" FromRole="Comments" ToRole="Stores" />
+        </EntityType>
+        <EntityType Name="Delivery">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Method" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GroupBuying" Relationship="Self.FK__GroupBuyi__Deliv__49C3F6B7" FromRole="Delivery" ToRole="GroupBuying" />
+        </EntityType>
+        <EntityType Name="GroupBuying">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StoreSN" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Startdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedPerson" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RequireDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CloseDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ShipAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeliverySN" Type="Int32" Nullable="false" />
+          <Property Name="LimitMoney" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LimitNumber" Type="Int32" />
+          <Property Name="Continued" Type="Boolean" Nullable="false" />
+          <Property Name="PaySN" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Delivery" Relationship="Self.FK__GroupBuyi__Deliv__49C3F6B7" FromRole="GroupBuying" ToRole="Delivery" />
+          <NavigationProperty Name="Members" Relationship="Self.FK__GroupBuyi__Creat__48CFD27E" FromRole="GroupBuying" ToRole="Members" />
+          <NavigationProperty Name="PayType" Relationship="Self.FK__GroupBuyi__PaySN__46E78A0C" FromRole="GroupBuying" ToRole="PayType" />
+          <NavigationProperty Name="Stores" Relationship="Self.FK__GroupBuyi__Store__47DBAE45" FromRole="GroupBuying" ToRole="Stores" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__GroupBuy__4D94879B" FromRole="GroupBuying" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Manage">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeSN" Type="Int32" Nullable="false" />
+          <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="DealDate" Type="DateTime" Precision="3" />
+          <Property Name="AdminSN" Type="Int32" />
+          <Property Name="MemberSN" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK__Manage__AdminSN__31EC6D26" FromRole="Manage" ToRole="Admin" />
+          <NavigationProperty Name="Members" Relationship="Self.FK__Manage__MemberSN__30F848ED" FromRole="Manage" ToRole="Members" />
+          <NavigationProperty Name="ProblemType" Relationship="Self.FK__Manage__TypeSN__32E0915F" FromRole="Manage" ToRole="ProblemType" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserSN" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__StoreS__398D8EEE" FromRole="Members" ToRole="Comments" />
+          <NavigationProperty Name="GroupBuying" Relationship="Self.FK__GroupBuyi__Creat__48CFD27E" FromRole="Members" ToRole="GroupBuying" />
+          <NavigationProperty Name="Manage" Relationship="Self.FK__Manage__MemberSN__30F848ED" FromRole="Members" ToRole="Manage" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Members__Address__29572725" FromRole="Members" ToRole="Users" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Customer__4E88ABD4" FromRole="Members" ToRole="Orders" />
+          <NavigationProperty Name="Stores" Relationship="Self.FK__Stores__MemberSN__36B12243" FromRole="Members" ToRole="Stores" />
+        </EntityType>
+        <EntityType Name="Orderdetails">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductSN" Type="Int32" Nullable="false" />
+          <Property Name="Quanity" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Discount" Type="Int32" />
+          <Property Name="Subtotal" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orderdeta__Order__5165187F" FromRole="Orderdetails" ToRole="Orders" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Orderdeta__Produ__52593CB8" FromRole="Orderdetails" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="PaySN" Type="Int32" Nullable="false" />
+          <Property Name="Payed" Type="Boolean" Nullable="false" />
+          <Property Name="CustomerSN" Type="Int32" Nullable="false" />
+          <Property Name="GroupBuyingID" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GroupBuying" Relationship="Self.FK__Orders__GroupBuy__4D94879B" FromRole="Orders" ToRole="GroupBuying" />
+          <NavigationProperty Name="Members" Relationship="Self.FK__Orders__Customer__4E88ABD4" FromRole="Orders" ToRole="Members" />
+          <NavigationProperty Name="Orderdetails" Relationship="Self.FK__Orderdeta__Order__5165187F" FromRole="Orders" ToRole="Orderdetails" />
+          <NavigationProperty Name="PayType" Relationship="Self.FK__Orders__PaySN__4CA06362" FromRole="Orders" ToRole="PayType" />
+        </EntityType>
+        <EntityType Name="PayType">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Method" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GroupBuying" Relationship="Self.FK__GroupBuyi__PaySN__46E78A0C" FromRole="PayType" ToRole="GroupBuying" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__PaySN__4CA06362" FromRole="PayType" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="ProblemType">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Manage" Relationship="Self.FK__Manage__TypeSN__32E0915F" FromRole="ProblemType" ToRole="Manage" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Stock" Type="Int32" Nullable="false" />
+          <Property Name="Unit" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Discontinued" Type="Boolean" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PhotoType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CategorySN" Type="Int32" Nullable="false" />
+          <Property Name="StoreSN" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Products__Catego__3F466844" FromRole="Products" ToRole="Category" />
+          <NavigationProperty Name="Orderdetails" Relationship="Self.FK__Orderdeta__Produ__52593CB8" FromRole="Products" ToRole="Orderdetails" />
+          <NavigationProperty Name="Stores" Relationship="Self.FK__Products__StoreS__403A8C7D" FromRole="Products" ToRole="Stores" />
+        </EntityType>
+        <EntityType Name="Stores">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminSN" Type="Int32" Nullable="false" />
+          <Property Name="MemberSN" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK__Stores__Status__35BCFE0A" FromRole="Stores" ToRole="Admin" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__StoreS__3A81B327" FromRole="Stores" ToRole="Comments" />
+          <NavigationProperty Name="GroupBuying" Relationship="Self.FK__GroupBuyi__Store__47DBAE45" FromRole="Stores" ToRole="GroupBuying" />
+          <NavigationProperty Name="Members" Relationship="Self.FK__Stores__MemberSN__36B12243" FromRole="Stores" ToRole="Members" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__StoreS__403A8C7D" FromRole="Stores" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="SN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="AuthSN" Type="Int32" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK__Admin__UserSN__2C3393D0" FromRole="Users" ToRole="Admin" />
+          <NavigationProperty Name="Auth" Relationship="Self.FK__Users__AuthSN__267ABA7A" FromRole="Users" ToRole="Auth" />
+          <NavigationProperty Name="Members" Relationship="Self.FK__Members__Address__29572725" FromRole="Users" ToRole="Members" />
+        </EntityType>
+        <Association Name="FK__Admin__UserSN__2C3393D0">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="UserSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Manage__AdminSN__31EC6D26">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Manage" Type="Self.Manage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Manage">
+              <PropertyRef Name="AdminSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stores__Status__35BCFE0A">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="Stores" Type="Self.Stores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Stores">
+              <PropertyRef Name="AdminSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__AuthSN__267ABA7A">
+          <End Role="Auth" Type="Self.Auth" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auth">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="AuthSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__Catego__3F466844">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategorySN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__StoreS__398D8EEE">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="MemberSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__StoreS__3A81B327">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="StoreSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupBuyi__Deliv__49C3F6B7">
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GroupBuying" Type="Self.GroupBuying" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delivery">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="GroupBuying">
+              <PropertyRef Name="DeliverySN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupBuyi__Creat__48CFD27E">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="GroupBuying" Type="Self.GroupBuying" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="GroupBuying">
+              <PropertyRef Name="CreatedPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupBuyi__PaySN__46E78A0C">
+          <End Role="PayType" Type="Self.PayType" Multiplicity="1" />
+          <End Role="GroupBuying" Type="Self.GroupBuying" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayType">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="GroupBuying">
+              <PropertyRef Name="PaySN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupBuyi__Store__47DBAE45">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="1" />
+          <End Role="GroupBuying" Type="Self.GroupBuying" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="GroupBuying">
+              <PropertyRef Name="StoreSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__GroupBuy__4D94879B">
+          <End Role="GroupBuying" Type="Self.GroupBuying" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupBuying">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="GroupBuyingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Manage__MemberSN__30F848ED">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Manage" Type="Self.Manage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Manage">
+              <PropertyRef Name="MemberSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Manage__TypeSN__32E0915F">
+          <End Role="ProblemType" Type="Self.ProblemType" Multiplicity="1" />
+          <End Role="Manage" Type="Self.Manage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProblemType">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Manage">
+              <PropertyRef Name="TypeSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Members__Address__29572725">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Members" Type="Self.Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Members">
+              <PropertyRef Name="UserSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__Customer__4E88ABD4">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CustomerSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stores__MemberSN__36B12243">
+          <End Role="Members" Type="Self.Members" Multiplicity="0..1" />
+          <End Role="Stores" Type="Self.Stores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Stores">
+              <PropertyRef Name="MemberSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orderdeta__Order__5165187F">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Orderdetails" Type="Self.Orderdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orderdetails">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orderdeta__Produ__52593CB8">
+          <End Role="Products" Type="Self.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orderdetails" Type="Self.Orderdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Orderdetails">
+              <PropertyRef Name="ProductSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__PaySN__4CA06362">
+          <End Role="PayType" Type="Self.PayType" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayType">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PaySN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__StoreS__403A8C7D">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="SN" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="StoreSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Project_V3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Auth" EntityType="Self.Auth" />
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" />
+          <EntitySet Name="Delivery" EntityType="Self.Delivery" />
+          <EntitySet Name="GroupBuying" EntityType="Self.GroupBuying" />
+          <EntitySet Name="Manage" EntityType="Self.Manage" />
+          <EntitySet Name="Members" EntityType="Self.Members" />
+          <EntitySet Name="Orderdetails" EntityType="Self.Orderdetails" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="PayType" EntityType="Self.PayType" />
+          <EntitySet Name="ProblemType" EntityType="Self.ProblemType" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="Stores" EntityType="Self.Stores" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK__Admin__UserSN__2C3393D0" Association="Self.FK__Admin__UserSN__2C3393D0">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Manage__AdminSN__31EC6D26" Association="Self.FK__Manage__AdminSN__31EC6D26">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Manage" EntitySet="Manage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stores__Status__35BCFE0A" Association="Self.FK__Stores__Status__35BCFE0A">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Stores" EntitySet="Stores" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__AuthSN__267ABA7A" Association="Self.FK__Users__AuthSN__267ABA7A">
+            <End Role="Auth" EntitySet="Auth" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__Catego__3F466844" Association="Self.FK__Products__Catego__3F466844">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__StoreS__398D8EEE" Association="Self.FK__Comments__StoreS__398D8EEE">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__StoreS__3A81B327" Association="Self.FK__Comments__StoreS__3A81B327">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupBuyi__Deliv__49C3F6B7" Association="Self.FK__GroupBuyi__Deliv__49C3F6B7">
+            <End Role="Delivery" EntitySet="Delivery" />
+            <End Role="GroupBuying" EntitySet="GroupBuying" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupBuyi__Creat__48CFD27E" Association="Self.FK__GroupBuyi__Creat__48CFD27E">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="GroupBuying" EntitySet="GroupBuying" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupBuyi__PaySN__46E78A0C" Association="Self.FK__GroupBuyi__PaySN__46E78A0C">
+            <End Role="PayType" EntitySet="PayType" />
+            <End Role="GroupBuying" EntitySet="GroupBuying" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupBuyi__Store__47DBAE45" Association="Self.FK__GroupBuyi__Store__47DBAE45">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="GroupBuying" EntitySet="GroupBuying" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__GroupBuy__4D94879B" Association="Self.FK__Orders__GroupBuy__4D94879B">
+            <End Role="GroupBuying" EntitySet="GroupBuying" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Manage__MemberSN__30F848ED" Association="Self.FK__Manage__MemberSN__30F848ED">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Manage" EntitySet="Manage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Manage__TypeSN__32E0915F" Association="Self.FK__Manage__TypeSN__32E0915F">
+            <End Role="ProblemType" EntitySet="ProblemType" />
+            <End Role="Manage" EntitySet="Manage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Members__Address__29572725" Association="Self.FK__Members__Address__29572725">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__Customer__4E88ABD4" Association="Self.FK__Orders__Customer__4E88ABD4">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stores__MemberSN__36B12243" Association="Self.FK__Stores__MemberSN__36B12243">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Stores" EntitySet="Stores" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orderdeta__Order__5165187F" Association="Self.FK__Orderdeta__Order__5165187F">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Orderdetails" EntitySet="Orderdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orderdeta__Produ__52593CB8" Association="Self.FK__Orderdeta__Produ__52593CB8">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Orderdetails" EntitySet="Orderdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__PaySN__4CA06362" Association="Self.FK__Orders__PaySN__4CA06362">
+            <End Role="PayType" EntitySet="PayType" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__StoreS__403A8C7D" Association="Self.FK__Products__StoreS__403A8C7D">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Project_V3ModelStoreContainer" CdmEntityContainer="Project_V3Entities">
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="Project_V3Model.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="UserSN" ColumnName="UserSN" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Auth">
+            <EntityTypeMapping TypeName="Project_V3Model.Auth">
+              <MappingFragment StoreEntitySet="Auth">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="AuthName" ColumnName="AuthName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="Project_V3Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="Project_V3Model.Comments">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="MemberSN" ColumnName="MemberSN" />
+                <ScalarProperty Name="StoreSN" ColumnName="StoreSN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Delivery">
+            <EntityTypeMapping TypeName="Project_V3Model.Delivery">
+              <MappingFragment StoreEntitySet="Delivery">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupBuying">
+            <EntityTypeMapping TypeName="Project_V3Model.GroupBuying">
+              <MappingFragment StoreEntitySet="GroupBuying">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StoreSN" ColumnName="StoreSN" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Startdate" ColumnName="Startdate" />
+                <ScalarProperty Name="CreatedPerson" ColumnName="CreatedPerson" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RequireDate" ColumnName="RequireDate" />
+                <ScalarProperty Name="CloseDate" ColumnName="CloseDate" />
+                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
+                <ScalarProperty Name="DeliverySN" ColumnName="DeliverySN" />
+                <ScalarProperty Name="LimitMoney" ColumnName="LimitMoney" />
+                <ScalarProperty Name="LimitNumber" ColumnName="LimitNumber" />
+                <ScalarProperty Name="Continued" ColumnName="Continued" />
+                <ScalarProperty Name="PaySN" ColumnName="PaySN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manage">
+            <EntityTypeMapping TypeName="Project_V3Model.Manage">
+              <MappingFragment StoreEntitySet="Manage">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="TypeSN" ColumnName="TypeSN" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="DealDate" ColumnName="DealDate" />
+                <ScalarProperty Name="AdminSN" ColumnName="AdminSN" />
+                <ScalarProperty Name="MemberSN" ColumnName="MemberSN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="Project_V3Model.Members">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="UserSN" ColumnName="UserSN" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orderdetails">
+            <EntityTypeMapping TypeName="Project_V3Model.Orderdetails">
+              <MappingFragment StoreEntitySet="Orderdetails">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductSN" ColumnName="ProductSN" />
+                <ScalarProperty Name="Quanity" ColumnName="Quanity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="Project_V3Model.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PaySN" ColumnName="PaySN" />
+                <ScalarProperty Name="Payed" ColumnName="Payed" />
+                <ScalarProperty Name="CustomerSN" ColumnName="CustomerSN" />
+                <ScalarProperty Name="GroupBuyingID" ColumnName="GroupBuyingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayType">
+            <EntityTypeMapping TypeName="Project_V3Model.PayType">
+              <MappingFragment StoreEntitySet="PayType">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProblemType">
+            <EntityTypeMapping TypeName="Project_V3Model.ProblemType">
+              <MappingFragment StoreEntitySet="ProblemType">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="Project_V3Model.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Discontinued" ColumnName="Discontinued" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="PhotoType" ColumnName="PhotoType" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CategorySN" ColumnName="CategorySN" />
+                <ScalarProperty Name="StoreSN" ColumnName="StoreSN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stores">
+            <EntityTypeMapping TypeName="Project_V3Model.Stores">
+              <MappingFragment StoreEntitySet="Stores">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="AdminSN" ColumnName="AdminSN" />
+                <ScalarProperty Name="MemberSN" ColumnName="MemberSN" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Project_V3Model.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="AuthSN" ColumnName="AuthSN" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

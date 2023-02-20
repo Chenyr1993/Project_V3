@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="49725c45c81b45f9a54613b47dfd5161" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="Project_V3Model.Admin" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_V3Model.Auth" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_V3Model.Category" Width="1.5" PointX="10.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_V3Model.Comments" Width="1.5" PointX="12.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_V3Model.Delivery" Width="1.5" PointX="13.5" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_V3Model.GroupBuying" Width="1.5" PointX="15.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_V3Model.Manage" Width="1.5" PointX="7.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_V3Model.Members" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_V3Model.Orderdetails" Width="1.5" PointX="20.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_V3Model.Orders" Width="1.5" PointX="18" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_V3Model.PayType" Width="1.5" PointX="13.5" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_V3Model.ProblemType" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_V3Model.Products" Width="1.5" PointX="12.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_V3Model.Stores" Width="1.5" PointX="10.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_V3Model.Users" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <AssociationConnector Association="Project_V3Model.FK__Admin__UserSN__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Manage__AdminSN__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Stores__Status__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Users__AuthSN__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Products__Catego__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Comments__StoreS__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Comments__StoreS__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__GroupBuyi__Deliv__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__GroupBuyi__Creat__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__GroupBuyi__PaySN__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__GroupBuyi__Store__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Orders__GroupBuy__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Manage__MemberSN__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Manage__TypeSN__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Members__Address__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Orders__Customer__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Stores__MemberSN__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Orderdeta__Order__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Orderdeta__Produ__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Orders__PaySN__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_V3Model.FK__Products__StoreS__403A8C7D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
