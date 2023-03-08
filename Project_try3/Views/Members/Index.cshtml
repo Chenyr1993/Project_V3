@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Project_try3.Models.Members>
+
+@{
+    ViewBag.Title = "會員列表";
+}
+
+<h2 class="text-center">會員列表</h2>
+<div class="container">
+    <div class="text-left">
+        <button type="button" id="ShowAddMember" class="btn btn-primary bi bi-file-earmark-plus " data-toggle="modal" data-target="#addMember">
+            新增會員
+        </button>
+    </div>
+    <div class="modal fade" id="addMember" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">新增會員</h5>
+                </div>
+                <div class="modal-body ">
+                    @Html.Action("_Create", "Members")
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users.Account)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Users.Account)
+                </td>
+                <td>
+                    @Html.ActionLink("編輯", "Edit", new { id = item.SN }, new { @class = "btn btn-primary" }) |
+
+                    @Html.ActionLink("刪除", "Delete", new { id = item.SN }, new { @class = "btn btn-danger", onclick = "return confirm('你確定要刪除" + item.Name + "的資料嗎？')" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

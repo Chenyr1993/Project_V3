@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Project_try3.Models.Users>
+
+@{
+    ViewBag.Title = "使用者列表";
+}
+
+<h2 class="text-center">使用者列表</h2>
+<div class="container">
+    <div class="text-left">
+        <button type="button" id="ShowAddUser" class="btn btn-primary bi bi-file-earmark-plus " data-toggle="modal" data-target="#addUser">
+            新增使用者
+        </button>
+    </div>
+    <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">新增使用者</h5>
+                </div>
+                <div class="modal-body ">
+                    @Html.Action("_Create", "Users")
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table ">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Account)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Enabled)
+            </th>
+            <th>
+                使用權限
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Enabled)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Auth.AuthName)
+                </td>
+                <td>
+
+                    <button type="button" id="@item.SN" class="btn btn-primary" data-toggle="modal" data-target="#editUser" onclick="getUsers(event)">
+                        編輯
+                    </button>
+                    @Html.ActionLink("刪除", "Delete", new { id = item.SN }, new { @class = "btn btn-danger" })
+                    @*@Html.ActionLink("Details", "Details", new { id = item.SN }, new { @class = "btn btn-danger" })*@
+                </td>
+            </tr>
+        }
+    </table>
+    <div class="modal fade" id="editUser" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">編輯使用者資料</h5>
+                </div>
+                <div class="modal-body" id="showEditModal">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function getUsers(e) {
+        $('#showEditModal').load("/Users/_Edit/" + e.target.id);
+    }
+</script>

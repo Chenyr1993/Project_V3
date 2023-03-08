@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Project_try3.Models.Admin>
+
+@{
+    ViewBag.Title = "管理員列表";
+}
+
+<h2 class="text-center">管理員列表</h2>
+<div class="container">
+    <div class="text-left">
+        <button type="button" id="ShowAddAdmin" class="btn btn-primary bi bi-file-earmark-plus " data-toggle="modal" data-target="#addAdmin">
+            新增管理員
+        </button>
+    </div>
+    <div class="modal fade" id="addAdmin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">新增管理員</h5>
+                </div>
+                <div class="modal-body ">
+                    @Html.Action("_Create", "Admins")
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Extension)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users.Account)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Extension)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Users.Account)
+                </td>
+                <td>
+                    @*@Html.ActionLink("編輯", "Edit", new { id = item.SN }, new { @class = "btn btn-primary"  }) |*@
+                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#editAdmin">
+                        編輯
+                    </button>
+
+                    @Html.ActionLink("刪除", "Delete", new { id = item.SN }, new { @class = "btn btn-danger", onclick = "return confirm('你確定要刪除" + item.Name + item.Title + "的資料嗎？')" })
+                    <div class="modal fade" id="editAdmin" tabindex="-1" aria-labelledby="editAdmin" aria-hidden="true">
+                        <div class="" id="editAdmin">
+                            <div class="modal-dialog">
+                                <div class="card card-body ">
+                                    <div class="modal-content">
+                                        <div class="modal-body d-flex">
+                                            @Html.Action("_Edit", new { id = item.SN })
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*@Html.ActionLink("編輯", "Edit", new { id = item.SN }, new { @class= "card-body" })*@
+                       
+                        </div>
+                    </div>
+                </td>
+
+
+
+            </tr>
+        }
+
+    </table>
+    </div>

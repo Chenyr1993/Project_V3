@@ -1,0 +1,26 @@
+﻿@model Project_try3.Models.Auth
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Auth</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AuthName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SN }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
