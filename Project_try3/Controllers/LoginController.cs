@@ -9,6 +9,7 @@ using Project_try3.ViewModels;
 
 namespace Project_try3.Controllers
 {
+    [LoginCheck]
     public class LoginController : Controller
     {
       Project_V3Entities db = new Project_V3Entities();
@@ -26,28 +27,29 @@ namespace Project_try3.Controllers
         {
             string password = hashPw.getHashPwd(vm.Password);
             var result = db.Users.Where(u => u.Account == vm.Account && u.Password == vm.Password).FirstOrDefault();
-            //var Admin=db.Users.Where(u=>u.Auth==vm.Account)
-            if (result == null) 
+
+            if (result == null)
             {
-                
+
                 ViewBag.ErrMessage = "帳號或密碼輸入錯誤，請再重試一次！";
                 return View(vm);
             }
-            if (!result.Enabled) 
+            if (!result.Enabled)
             {
                 ViewBag.ErrMessage = "帳號異常，請聯絡管理員";
                 return View(vm);
             }
-            if (result.AuthSN==1 ) {
+            if (result.AuthSN == 1)
+            {
                 //顯示管理員畫面;
                 Session["user"] = result;
                 return RedirectToAction("Index");
             }
             //顯示會員畫面(可以做在details)
             Session["user"] = result;
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Members");
         }
-        public ActionResult Logout() 
+        public ActionResult Logout()
         {
             Session["user"] = null;
             return RedirectToAction("Login");

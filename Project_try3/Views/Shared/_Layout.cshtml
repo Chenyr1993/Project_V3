@@ -1,82 +1,64 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string str = "", action = "";
+    str = Session["user"] == null ? "登入" : "登出";
+    action = Session["user"] == null ? "Login" : "Logout";
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - 饗訂股份有限公司</title>
-    <link href="~/Content/Site.css" rel="stylesheet" />
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <link href="~/Content/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+
+    @RenderSection("css", false)
 </head>
-<body>
-    <div class="mt-5">
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-info shadow">
-            <div class="container">
+<body class="pt-3">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-info shadow">
+        <div class="container">
 
-                @Html.ActionLink("饗訂後台作業系統", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent " aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            @Html.ActionLink("饗訂", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent " aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="collapse navbar-collapse " id="navbarContent">
-                    @*@if (Session["admin"] != null)
-                    {*@
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">@Html.ActionLink("會員資料管理", "Index", "Members", null, new { @class = "nav-link" })</li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">商店資料管理</a>
-                                <div class="dropdown-menu">
-                                    @Html.ActionLink("商店", "Index", "Stores", null, new { @class = "dropdown-item " })
-                                    @Html.ActionLink("商品", "Index", "Products", null, new { @class = "dropdown-item" })
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown ">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">平台設定管理</a>
-                                <div class="dropdown-menu">
+            <div class="collapse navbar-collapse " id="navbarContent">
 
-                                    @Html.ActionLink("使用者列表", "Index", "Users", new { area = "" }, new { @class = "dropdown-item  " })
+                <ul class="navbar-nav ">
 
-                                    @Html.ActionLink("管理員列表", "Index", "Admins", new { area = "" }, new { @class = "dropdown-item  " })
+                    <li class="nav-item">@Html.ActionLink("商店", "Index", "Home", null, new { @class = "nav nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("會員專區", "Index", "Members", null, new { @class = "nav nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("常見問題", "Index", "Home", null, new { @class = "nav nav-link" })</li>
 
-                                    @Html.ActionLink("test", "Index", "Home", new { area = "" }, new { @class = "dropdown-item " })
-
-
-                                </div>
-                            </li>
-                           
-                                <li class="nav-item">@Html.ActionLink("登出", "Logout", "Login", null, new { @class = " btn btn-danger" })</li>
-                            </ul>
-
-                        @*}
-                        else
-                        {*@
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item">@Html.ActionLink("登入", "Login", "Login", null, new { @class = " btn btn-warning " })</li>
-                            </ul>
-                       @*}*@
+                    <li class="nav-item  ">@Html.ActionLink(str, action, "Login", null, new { @class = " btn btn-warning " })</li>
+                    <li class="nav-item ml-2 ">@Html.ActionLink("註冊", "Create", "Members", null, new { @class = " btn btn-primary " })</li>
+                </ul>
 
 
 
 
 
-                    </div>
-
-                </div>
-            </nav>
-
-            <div class="container body-content mt-5 pt-2">
-                @RenderBody()
-                <hr />
-                <footer>
-                    <p>所有權屬&copy; @DateTime.Now.ToString("D") -饗訂股份有限公司</p>
-                </footer>
             </div>
 
-            <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-            <script src="~/Scripts/bootstrap.min.js"></script>
-            @RenderSection("script", false)
-            @RenderSection("css", false)
-
         </div>
-    </body>
+    </nav>
+
+    <div class="container body-content pt-5">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("script", false)
+    
+
+
+</body>
 </html>

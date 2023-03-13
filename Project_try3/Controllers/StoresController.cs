@@ -20,10 +20,10 @@ namespace Project_try3.Controllers
             var stores = db.Stores.Include(s => s.Admin).Include(s => s.Members);
             return View(stores.ToList());
         }
-       
+
 
         // GET: Stores/Details/5
-        public ActionResult _Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -34,11 +34,11 @@ namespace Project_try3.Controllers
             {
                 return HttpNotFound();
             }
-            return PartialView(stores);
+            return View(stores);
         }
 
-        // GET: Stores/Create
-        public ActionResult Create()
+            // GET: Stores/Create
+            public ActionResult Create()
         {
             ViewBag.AdminSN = new SelectList(db.Admin, "SN", "Name");
             ViewBag.MemberSN = new SelectList(db.Members, "SN", "Name");

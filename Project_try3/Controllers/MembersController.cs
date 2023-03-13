@@ -18,10 +18,17 @@ namespace Project_try3.Controllers
         // GET: Members
         public ActionResult Index()
         {
-            var members = db.Members.Include(m => m.Users);
-            return View(members.ToList());
+            int id = ((Users)Session["user"]).Members.FirstOrDefault().SN;
+            var members = db.Members.Find(id);
+            return View(members);
         }
+        public ActionResult Manager()
+        {
+            //給管理員的畫面
+            var members = db.Members.Include(m => m.Users).ToList();
 
+            return View(members);
+        }
         // GET: Members/Details/5
         public ActionResult Details(int? id)
         {
@@ -38,10 +45,10 @@ namespace Project_try3.Controllers
         }
 
         // GET: Members/Create
-        public ActionResult _Create()
+        public ActionResult Create()
         {
             ViewBag.UserSN = new SelectList(db.Users, "SN", "Account");
-            return PartialView();
+            return View();
         }
 
         // POST: Members/Create
@@ -108,8 +115,8 @@ namespace Project_try3.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(members).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(members).State = EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.UserSN = new SelectList(db.Users, "SN", "Account", members.UserSN);

@@ -1,0 +1,66 @@
+﻿@model Project_try3.Models.Stores
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div>
+    <div class="card border-info">
+        <div class="card-body ">
+            <h3 class=" alert alert-info text-center">
+                @Html.DisplayFor(model => model.Name)
+            </h3>
+
+            <div class="row border-top border-bottom mb-3">
+                <div class="col-md-5 text-right">
+                    <div>
+                        @Html.DisplayNameFor(model => model.Phone)：
+                    </div>
+                    <div>
+                        @Html.DisplayNameFor(model => model.Address)：
+                    </div>
+                    <div>
+                        @Html.DisplayNameFor(model => model.Description)：
+                    </div>
+                    <div>
+                        @Html.DisplayNameFor(model => model.Status)：
+                    </div>
+                </div>
+
+                <div class="col-md-7">
+                    <div>
+                        @Html.DisplayFor(model => model.Phone)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(model => model.Address)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(model => model.Description)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(model => model.Status)
+                    </div>
+
+                </div>
+            </div>
+            <div>
+                <h5 class="text-center">商品項目</h5>
+                @Html.Action("_Create", "Orders", new { id =Model.GroupBuying.FirstOrDefault().StoreSN })
+            </div>
+            <div class="text-center">
+                <a href="#" class="btn btn-primary">訂購餐點</a>
+                <a href="#" class="btn btn-primary">大量訂單</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<p>
+
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.SN }) |*@
+    @Html.ActionLink("Back to List", "Index", "Home")
+
+</p>

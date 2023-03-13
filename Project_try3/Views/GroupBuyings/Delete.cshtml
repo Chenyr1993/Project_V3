@@ -1,0 +1,136 @@
+﻿@model Project_try3.Models.GroupBuying
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>GroupBuying</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Startdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Startdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequireDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CloseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CloseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LimitMoney)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LimitMoney)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LimitNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LimitNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Continued)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Continued)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Delivery.Method)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Delivery.Method)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Members.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Members.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayType.Method)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayType.Method)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stores.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stores.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

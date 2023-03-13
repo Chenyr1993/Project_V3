@@ -1,51 +1,48 @@
 ﻿@model IEnumerable<Project_try3.Models.Stores>
-
+@*@model Project_try3.Models.Stores*@
 @{
     ViewBag.Title = "Index";
+
 }
-<h2>@* jumbtron顯示注意事項 *@</h2>
 
-
-
-
-<div class="row mt-3 w-80">
-    <div class="col-md-9 mr-auto">
+@*<h2>Index</h2>*@
+<div class="d-flex">
+    <div class="row pt-3 ">
         @foreach (var item in Model)
         {
+            <div class="col-md-4 ">
 
-            <div class="card m-3" style="width: 18rem;">
-                <div class="card-header" @*style="position: relative; width: 100%; padding-top: 70.9459%;
-            padding-bottom: 0; box-shadow: 0 0 8px 0 rgba(63,69,81,0.16); margin-top: 1rem; margin-bottom: 0.9em; overflow: hidden;
-            border-radius: 8px; will-change: transform;"*@>
-                    <iframe loading="lazy" @*style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"*@
-                            src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFcHaEmK34&#x2F;view?embed">
-                    </iframe>
-                </div>
+                <div class="card ">
+                    <div class="card-header">
+                        <iframe loading="lazy" src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFcHaEmK34&#x2F;view?embed">
+                        </iframe>
+                    </div>
 
-                <div class="card-body">
-                    <h5 class="card-title"><strong>@Html.DisplayFor(modelItem => item.Name)</strong></h5>
-                    <p class="card-text">
-                        <div>@Html.DisplayFor(modelItem => item.Address)</div>
-                        <div>@Html.DisplayFor(modelItem => item.Phone)</div>
-                        <div class="text-success">@Html.DisplayFor(modelItem => item.Status)</div>
-                        @*<div>@Html.DisplayFor(modelItem => item.Description)</div>*@
-                    </p>
-                    <div class=" text-center">
-                        @*@Html.ActionLink("詳細資訊", "_Details", new { id = item.SN }, new { @class = "btn btn-primary" })*@
-                        <button id="@item.SN" type="button" class="btn btn-primary">
-                            點我看菜單
-                        </button>
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>@Html.DisplayFor(modelItem => item.Name)</strong></h5>
+                        <p class="card-text">
+                            <div class="text-truncate">@Html.DisplayFor(modelItem => item.Address)</div>
+                            <div>@Html.DisplayFor(modelItem => item.Phone)</div>
+                            <div class="text-success">@Html.DisplayFor(modelItem => item.Status)</div>
+                            @*<div>@Html.DisplayFor(modelItem => item.Description)</div>*@
+                        </p>
+                        <div class=" text-center">
+                            @*@Html.ActionLink("詳細資訊", "_Details", new { id = item.SN }, new { @class = "btn btn-primary" })*@
+
+                            @Html.ActionLink("點我看菜單", "Details", "Stores", new { id = item.SN }, new { @class = "btn btn-primary" })
+
+                        </div>
                     </div>
                 </div>
+
+
             </div>
-
-
         }
     </div>
-    <div class="col-md-3 ml-auto">
+    <div class="col-md-3 ">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <form class="form-inline my-2 my-lg-0">
+                <form class="form-inline my-3 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success btn-block my-2 my-sm-0" type="submit">Search</button>
                 </form>
@@ -53,15 +50,21 @@
 
             <li class="nav nav-item bg-info"><strong>依地區</strong></li>
             <li class="nav-item">
-                <a class="nav-link " href="@Url.Action("Index", "Home" ,new{id=Model.Where(a=>a.Address=="高雄市%")})">
+                <a class="nav-link " href="@Url.Action("Index", "Home")">
+                    台北市
+                </a>
+                <a class="nav-link " href="@Url.Action("Index", "Home" )">
                     高雄市
+                </a>
+                <a class="nav-link " href="@Url.Action("Index", "Home" )">
+                    台南市
                 </a>
             </li>
             <li class="nav nav-item bg-info"><strong>依種類</strong></li>
             <li class="nav-item">
                 @foreach (var item in Model)
                 {
-                    <a class="nav-link " href=@Url.Action("CategeoryList", "Home" @*,new{id=item.Products.FirstOrDefault().CategorySN}*@)>
+                    <a class="nav-link " href=@Url.Action("CategeoryList", "Home")>
                     </a>
                 }
             </li>
@@ -99,4 +102,3 @@
     </style>
 
 }
-

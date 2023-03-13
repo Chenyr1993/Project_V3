@@ -37,12 +37,12 @@ namespace Project_try3.Controllers
         }
 
         // GET: Orders/Create
-        public ActionResult Create()
+        public ActionResult _Create()
         {
             ViewBag.GroupBuyingID = new SelectList(db.GroupBuying, "ID", "Title");
             ViewBag.CustomerSN = new SelectList(db.Members, "SN", "Name");
             ViewBag.PaySN = new SelectList(db.PayType, "SN", "Method");
-            return View();
+            return PartialView();
         }
 
         // POST: Orders/Create
@@ -50,7 +50,7 @@ namespace Project_try3.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CreatedDate,PaySN,Payed,CustomerSN,GroupBuyingID")] Orders orders)
+        public ActionResult _Create([Bind(Include = "ID,CreatedDate,PaySN,Payed,CustomerSN,GroupBuyingID")] Orders orders)
         {
             if (ModelState.IsValid)
             {
