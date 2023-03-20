@@ -124,8 +124,9 @@ namespace Project_try3.Controllers
         //}
 
         // GET: Orders/Create
-        public ActionResult CreateforGP()
+        public ActionResult CreateforGP(int StoreSN)
         {
+            ViewBag.StoreSN = StoreSN;
             ViewBag.GroupBuyingID = new SelectList(db.GroupBuying, "ID", "Title");
             ViewBag.CustomerSN = new SelectList(db.Members, "SN", "Name");
             ViewBag.PaySN = new SelectList(db.PayType, "SN", "Method");
@@ -137,13 +138,21 @@ namespace Project_try3.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateforGP(Orders orders)
+        public ActionResult CreateforGP(Orders orders,string cartData)
         {//新增storeProc
             //處理新增欄位
             if (ModelState.IsValid)
             {
-                db.Orders.Add(orders);
-                db.SaveChanges();
+                var memID = ((Users)Session["user"]).Members.FirstOrDefault().SN;
+                List<SqlParameter> list3 = new List<SqlParameter>
+                {
+                        new SqlParameter("PaySN",orders.PaySN),
+                        new SqlParameter("Payed",orders.Payed),
+                        new SqlParameter("CustomerSN",memID),
+                        new SqlParameter("GroupBuyingID",orders.GroupBuyingID),
+                        new SqlParameter("cart", cartData)
+                        };
+                sd.executeSqlBySP("addOrders", list3);
                 return RedirectToAction("Index");
             }
 

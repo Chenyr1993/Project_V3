@@ -471,7 +471,7 @@
     <Content Include="Views\Stores\Edit.cshtml" />
     <Content Include="Views\Stores\Index.cshtml" />
     <Content Include="Views\Stores\Details.cshtml" />
-    <Content Include="Views\Orders\_Create.cshtml" />
+    <Content Include="Views\Orders\CreateforGP.cshtml" />
     <Content Include="Views\Orders\Delete.cshtml" />
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Orders\Edit.cshtml" />

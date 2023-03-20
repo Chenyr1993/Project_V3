@@ -24,7 +24,7 @@
 <div class="text-right">
     <button id="renewCart" class="btn btn-primary"><i class="bi bi-cart-plus-fill" type="button" data-toggle="tooltip" data-placement="bottom" title="更新購物車"></i>更新購物車</button>
     <button id="clearCart" class="btn btn-warning"><i class="bi bi-cart-x-fill" type="button" data-toggle="tooltip" data-placement="bottom" title="清空購物車"></i> 清空購物車</button>
-    <a id="checkout" href="@Url.Action("Create","Orders",new { storeSN = Model.FirstOrDefault().StoreSN })" class="btn btn-success"><i class="bi bi-cash-coin" type="button" data-toggle="tooltip" data-placement="bottom" title="確定結帳"></i> 確定結帳</a>
+    <a id="checkout" href="@Url.Action("CreateforGP","Orders",new { storeSN = Model.FirstOrDefault().StoreSN })" class="btn btn-success"><i class="bi bi-cash-coin" type="button" data-toggle="tooltip" data-placement="bottom" title="確定結帳"></i> 確定結帳</a>
 </div>
 <div>
     <button class="btn btn-link"><i class="bi bi-arrow-90deg-left"></i>@Html.ActionLink("回到店家首頁 ", "Index", "Stores", null, null)</button>
