@@ -1,0 +1,145 @@
+﻿@model Project_try3.Models.Orders
+@using Project_try3.Models
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var memName = ((Users)Session["user"]).Members.FirstOrDefault().Name;
+
+}
+
+<h2>結帳</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.GroupBuying.StoreSN, "選擇餐廳", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            <input id="storeSN" name="storeSN" class="form-control" value="@ViewBag.storeSN" hidden />
+            <input value="@ViewBag.StoreName" class="form-control" readonly="readonly" />
+            @Html.ValidationMessageFor(model => model.GroupBuying.StoreSN, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GroupBuying.CreatedPerson, "訂購人", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            <input type="text" value=@memName class="form-control" readonly="readonly" />
+            @Html.ValidationMessageFor(model => model.GroupBuying.CreatedPerson, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GroupBuying.RequireDate, "預計取貨時間", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.GroupBuying.RequireDate, new { htmlAttributes = new { @class = "form-control", @type = "datetime-local" } })
+            @Html.ValidationMessageFor(model => model.GroupBuying.RequireDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CustomerSN, "收貨人", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" value="" class="form-control" />
+            @*@Html.EditorFor(model => model.CustomerSN, new { @class = "form-control" })*@
+            @Html.ValidationMessageFor(model => model.CustomerSN, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.GroupBuying.ShipAddress,"收貨地址", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.ShipAddress, new { htmlAttributes = new { @class = "form-control" } })*@
+            <div class="tw-city-selector" role="tw-city-selector" id="addressSelector" data-has-zipcode></div>
+            <input onclick="test()" class="form-control text-box single-line" data-val="true" data-val-required="送貨地址 欄位是必要項。"
+                   id="ShipAddress" name="GroupBuying.ShipAddress" type="text" value="" />
+            @Html.ValidationMessageFor(model => model.GroupBuying.ShipAddress, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GroupBuying.DeliverySN, "取貨方式", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.DropDownList("DeliverySN", null, htmlAttributes: new { @class = "form-control" })*@
+            <select class="form-control" id="DeliverySN" name="GroupBuying.DeliverySN">
+                <option value="1">外帶自取</option>
+                <option value="2">店家外送</option>
+            </select>
+            @Html.ValidationMessageFor(model => model.GroupBuying.DeliverySN, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    @* 訂單欄位 *@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PaySN, "PaySN", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("PaySN", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.PaySN, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" hidden>
+        @Html.LabelFor(model => model.Payed, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.CheckBoxFor(model => model.Payed, htmlAttributes: new { @checked = false })
+                @Html.ValidationMessageFor(model => model.Payed, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+    <!--<div class="form-group" hidden>
+        Html.LabelFor(model => model.GroupBuyingID, "GroupBuyingID", htmlAttributes: new { class = "control-label col-md-2" })
+        <div class="col-md-10">-->
+            @*@Html.DropDownList("GroupBuyingID", null, htmlAttributes: new { @class = "form-control" })*@
+            <!--Html.ValidationMessageFor(model => model.GroupBuyingID, "", new { class = "text-danger" })
+        </div>
+    </div>-->
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+<input id="cartData" name="cartData" type="hidden" />
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tw-city-selector@2.1.1/dist/tw-city-selector.min.js"></script>
+<script>
+        new TwCitySelector()
+        let test = () => {
+            const container = $("#addressSelector")
+
+        const county = container.find(".county")
+        const district = container.find(".district")
+        const zipcode = container.find(".zipcode")
+
+        let address = zipcode.val() + county.val() + district.val()
+        $("#ShipAddress").val(address)
+        }
+
+</script>

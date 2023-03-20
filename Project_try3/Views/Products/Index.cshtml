@@ -20,8 +20,8 @@
             @Html.DisplayNameFor(model => model.Stock)
         </th>
         @*<th>
-                @Html.DisplayNameFor(model => model.Unit)
-            </th>*@
+            @Html.DisplayNameFor(model => model.Unit)
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.UnitPrice)
         </th>
@@ -32,8 +32,8 @@
             @Html.DisplayNameFor(model => model.Photo)
         </th>
         @*<th>
-                @Html.DisplayNameFor(model => model.PhotoType)
-            </th>*@
+            @Html.DisplayNameFor(model => model.PhotoType)
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.CreatedDate)
         </th>
@@ -56,8 +56,8 @@
                 @Html.DisplayFor(modelItem => item.Stock)/@Html.DisplayFor(modelItem => item.Unit)
             </td>
             @*<td>
-                    @Html.DisplayFor(modelItem => item.Unit)
-                </td>*@
+                @Html.DisplayFor(modelItem => item.Unit)
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.UnitPrice)
             </td>
@@ -76,31 +76,34 @@
                      padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16);  overflow: hidden;
                      border-radius: 8px; will-change: transform;">
                         <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-                                src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFcHqB1JiU&#x2F;view?embed">
+                                src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFcHqB1JiU&#x2F;view?embed" >
                         </iframe>
                     </div>
                 }
 
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.PhotoType)
-                </td>*@
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.PhotoType)
+                    </td>*@
 
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stores.Name)
-            </td>
-            <td>
-                @Html.ActionLink("編輯內容", "Edit", new { id = item.SN }, new { @class = "btn btn-primary mb-1" })
-                @*@Html.ActionLink("Details", "Details", new { id = item.SN }, new { @class = "btn btn-danger" }) |*@
-                @Html.ActionLink("刪除商品", "Delete", new { id = item.SN }, new { @class = "btn btn-danger", onclick = "return confirm('你確定要刪除" + item.Stores.Name + item.ProductName + "的資料嗎？')" })
-            </td>
-        </tr>
-    }
-
-</table>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stores.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("編輯內容", "Edit", new { id = item.SN }, new { @class = "btn btn-primary mb-1" }) 
+                    @*@Html.ActionLink("Details", "Details", new { id = item.SN }, new { @class = "btn btn-danger" }) |*@
+                    @Html.ActionLink("刪除商品", "Delete", new { id = item.SN }, new { @class="btn btn-danger",onclick = "return confirm('你確定要刪除" +item.Stores.Name+item.ProductName+ "的資料嗎？')" })
+                </td>
+            </tr>
+        }
+            </table>
+<div>
+    @Html.ActionLink("返回商店列表", "Index", "Stores", null,null)
+    @Html.ActionLink("返回商店產品列表", "Index", "Products", null,null)
+</div>

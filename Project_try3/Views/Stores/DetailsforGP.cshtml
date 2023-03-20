@@ -1,0 +1,63 @@
+﻿@model Project_try3.Models.Stores
+
+@{
+    ViewBag.Title = "DetailsforGP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="card border-info">
+        <div class="card-body ">
+            <h3 class=" alert alert-info text-center">
+                @Html.DisplayFor(model => model.Name)
+            </h3>
+
+            <div class="row border-top border-bottom mb-3">
+                <div class="col-md-5 text-right">
+                    <div>
+                        @Html.DisplayNameFor(model => model.Phone)：
+                    </div>
+                    <div>
+                        @Html.DisplayNameFor(model => model.Address)：
+                    </div>
+                    <div>
+                        @Html.DisplayNameFor(model => model.Description)：
+                    </div>
+                    <div>
+                        @Html.DisplayNameFor(model => model.Status)：
+                    </div>
+                </div>
+
+                <div class="col-md-7">
+                    <div>
+                        @Html.DisplayFor(model => model.Phone)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(model => model.Address)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(model => model.Description)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(model => model.Status)
+                    </div>
+
+                </div>
+                @Html.ActionLink("建立團購", "Create", "GroupBuyings", new { storeSN = Model.SN }, new { @class = "btn btn-success ml-auto mr-5" })
+            </div>
+            <div>
+                <h5 class="text-center">商品項目</h5>
+                @Html.Action("_MenuforGP", "Home", new { id = Model.SN,groupBuyId=Model.GroupBuying.FirstOrDefault().ID })
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<p>
+
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.SN }) |*@
+    @Html.ActionLink("Back to List", "Index", "Home")
+
+</p>

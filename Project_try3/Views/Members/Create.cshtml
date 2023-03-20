@@ -5,64 +5,64 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+<div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Users.Account, "帳號", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Users.Account, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Users.Account, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Users.Account, "帳號", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Users.Account, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Users.Account, "", new { @class = "text-danger" })
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Users.Password, "密碼", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Users.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Users.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })*@
-                <div class="tw-city-selector d-flex" role="tw-city-selector" id="addressSelector" data-has-zipcode></div>
-                <input onclick="test()" class="form-control text-box single-line" data-val="true" data-val-maxlength="地址字數上限為50字" data-val-maxlength-max="50" data-val-required="地址 欄位是必要項。" id="Address" name="Address" type="text" value="">
-                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="註冊" class="btn btn-success" />
-            </div>
-        </div>
-
     </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Users.Password, "密碼", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Users.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Users.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })*@
+            <div class="tw-city-selector d-flex" role="tw-city-selector" id="addressSelector" data-has-zipcode></div>
+            <input onclick="test()" class="form-control text-box single-line" data-val="true" data-val-maxlength="地址字數上限為50字" data-val-maxlength-max="50" data-val-required="地址 欄位是必要項。" id="Address" name="Address" type="text" value="">
+            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="註冊" class="btn btn-success" />
+        </div>
+    </div>
+
+</div>
 }
 @*<button onclick="test()">test</button>*@
 
@@ -70,36 +70,36 @@
 @section css{
     <style>
 
-        .tw-city-selector select, input {
+        .tw-city-selector select,input {
             border-radius: 3px;
             border: 1px solid #808080;
+            
             font-size: 14pt;
             color: #000f;
         }
-
         .tw-city-selector input {
-            align-content: baseline;
+            align-content:baseline;
         }
     </style>
-}
+    }
 
 @section script{
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tw-city-selector@2.1.1/dist/tw-city-selector.min.js"></script>
-    <script>
-        new TwCitySelector()
-        let test = () => {
-            const container = $("#addressSelector")
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tw-city-selector@2.1.1/dist/tw-city-selector.min.js"></script>
+<script>
+    new TwCitySelector()
+    let test = () => {
+        const container = $("#addressSelector")
+      
+        const county = container.find(".county")
+        const district = container.find(".district")
+        const zipcode = container.find(".zipcode")
+        let address = zipcode.val() + county.val() + district.val()
+        $("#Address").val(address)
+    }
 
-            const county = container.find(".county")
-            const district = container.find(".district")
-            const zipcode = container.find(".zipcode")
-            let address = zipcode.val() + county.val() + district.val()
-            $("#Address").val(address)
-        }
-
-    </script>
+</script>
 }
 

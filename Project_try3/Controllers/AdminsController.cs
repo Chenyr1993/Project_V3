@@ -15,6 +15,7 @@ namespace Project_try3.Controllers
     {
         private Project_V3Entities db = new Project_V3Entities();
         SetData sd = new SetData();
+
         // GET: Admins
         public ActionResult Index()
         {
@@ -41,7 +42,7 @@ namespace Project_try3.Controllers
         public ActionResult _Create()
         {
 
-            ViewBag.UserSN = new SelectList(db.Users, "SN", "Account");
+            //ViewBag.UserSN = new SelectList(db.Users, "SN", "Account");
             return PartialView();
         }
 
@@ -52,20 +53,23 @@ namespace Project_try3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Admin admin)
         {
+
             if (ModelState.IsValid)
             {
-                //Users user = admin.Users;
 
+                //var users = db.Users.Add(admin.Users);
+                //db.Admin.Add(admin);
+                //db.SaveChanges();
                 string sql = "insert into Users ( Account,Password,AuthSN,Enabled ) " +
-                    "values(@Account,@Password,@AuthSN,@Enabled)";
+                "values(@Account,@Password,@AuthSN,@Enabled)";
                 List<SqlParameter> list = new List<SqlParameter>
                 {
                     new SqlParameter("Account",admin.Users.Account),
                     new SqlParameter("Password", admin.Users.Password),
-                    
+
                     new SqlParameter("AuthSN", 1),
                     new SqlParameter("Enabled", 1)
-                    
+
                 };
                 sd.executeSql(sql, list);
                 admin.UserSN = db.Users.Where(a => a.Account == admin.Users.Account).FirstOrDefault().SN;
@@ -78,16 +82,15 @@ namespace Project_try3.Controllers
                     new SqlParameter("Title", admin.Title),
                     new SqlParameter("Phone", admin.Phone),
                     new SqlParameter("Email", admin.Email)
-                                   
+
                 };
                 sd.executeSql(sql2, list2);
-                //分存兩張表時，只要做了一個ado.net,另一個也要做ado
-                //db.Admin.Add(admin);
-                //db.SaveChanges();
-                //ViewBag.UserSN = admin.UserSN;
-
                 return RedirectToAction("Index");
             }
+
+
+
+
 
             return View(admin);
         }

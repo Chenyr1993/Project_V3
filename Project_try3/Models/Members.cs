@@ -25,26 +25,34 @@ namespace Project_try3.Models
             this.Orders = new HashSet<Orders>();
             this.Stores = new HashSet<Stores>();
         }
+
         [Key]
-        [DisplayName("會員編號")]
         public int SN { get; set; }
-        [DisplayName("使用者編號")]
+        [DisplayName("帳號")]
+        [Required(ErrorMessage = "欄位必填")]
         public int UserSN { get; set; }
         [DisplayName("姓名")]
-        [Required]
+        [Required(ErrorMessage = "欄位必填")]
+        [StringLength(30, MinimumLength = 2, ErrorMessage = "字數最少2字，最多30字。")]
+
         public string Name { get; set; }
         [DisplayName("電話")]
-        [Required]
+        [Required(ErrorMessage = "欄位必填")]
+        [StringLength(13, MinimumLength = 7, ErrorMessage = "字數最少7字，最多30字。")]
+
+
         public string Phone { get; set; }
-        
-        [DisplayName("信箱")]
-        [Required]
+        [DisplayName("Email")]
+        [Required(ErrorMessage = "欄位必填")]
+        [StringLength(100, ErrorMessage = "字數最多100字。")]
+        [DataType(DataType.Password)]
         public string Email { get; set; }
-        
+
         [DisplayName("地址")]
-        [Required]
+        [Required(ErrorMessage = "欄位必填")]
+        [StringLength(50, MinimumLength = 4, ErrorMessage = "字數最少14字，最多50字")]
         public string Address { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comments> Comments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

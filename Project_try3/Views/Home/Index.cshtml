@@ -2,7 +2,7 @@
 @*@model Project_try3.Models.Stores*@
 @{
     ViewBag.Title = "Index";
-
+    
 }
 
 @*<h2>Index</h2>*@
@@ -28,9 +28,9 @@
                         </p>
                         <div class=" text-center">
                             @*@Html.ActionLink("詳細資訊", "_Details", new { id = item.SN }, new { @class = "btn btn-primary" })*@
-
-                            @Html.ActionLink("點我看菜單", "Details", "Stores", new { id = item.SN }, new { @class = "btn btn-primary" })
-
+                            
+                                @Html.ActionLink("點我看菜單","Details", "Stores", new { id = item.SN }, new {@class="btn btn-primary" })
+                            
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
             </div>
         }
     </div>
-    <div class="col-md-3 ">
+    @*<div class="col-md-3 ">
         <ul class="nav flex-column">
             <li class="nav-item">
                 <form class="form-inline my-3 my-lg-0">
@@ -69,7 +69,7 @@
                 }
             </li>
         </ul>
-    </div>
+    </div>*@
 </div>
 
 

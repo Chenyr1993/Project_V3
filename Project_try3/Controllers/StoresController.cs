@@ -21,9 +21,27 @@ namespace Project_try3.Controllers
             return View(stores.ToList());
         }
 
-
         // GET: Stores/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string GpID)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Stores stores = db.Stores.Find(id);
+            //if (GpID != null) 
+            //{
+            //    stores = (Stores)db.Stores.Where(s => s.SN == id).Where(s => s.GroupBuying.FirstOrDefault().ID == GpID);
+            //}
+            if (stores == null)
+            {
+                return HttpNotFound();
+            }
+            return View(stores);
+        }
+
+        //GP
+        public ActionResult DetailsforGP(int? id, string GroupBuyId)
         {
             if (id == null)
             {
@@ -34,11 +52,14 @@ namespace Project_try3.Controllers
             {
                 return HttpNotFound();
             }
+            var store = stores.GroupBuying.Where(s => s.ID ==GroupBuyId).ToList();
+          
             return View(stores);
         }
 
-            // GET: Stores/Create
-            public ActionResult Create()
+
+        // GET: Stores/Create
+        public ActionResult Create()
         {
             ViewBag.AdminSN = new SelectList(db.Admin, "SN", "Name");
             ViewBag.MemberSN = new SelectList(db.Members, "SN", "Name");
@@ -64,7 +85,7 @@ namespace Project_try3.Controllers
             ViewBag.MemberSN = new SelectList(db.Members, "SN", "Name", stores.MemberSN);
             return View(stores);
         }
-        [LoginCheck]
+
         // GET: Stores/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -87,7 +108,7 @@ namespace Project_try3.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SN,AdminSN,MemberSN,Name,Phone,Address,Description,CreatedDate,Status")] Stores stores,DateTime cd)
+        public ActionResult Edit([Bind(Include = "SN,AdminSN,MemberSN,Name,Phone,Address,Description,CreatedDate,Status")] Stores stores, DateTime cd)
         {
             if (ModelState.IsValid)
             {
@@ -102,7 +123,7 @@ namespace Project_try3.Controllers
         }
 
         // GET: Stores/Delete/5
-        [LoginCheck]
+
         public ActionResult Delete(int? id)
         {
             if (id == null)

@@ -1,0 +1,176 @@
+﻿@model IEnumerable<Project_try3.Models.Products>
+
+
+<table class="table ">
+    <thead>
+
+
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+
+            <th>
+                數量
+            </th>
+        </tr>
+    </thead>
+    <tbody id="orderNum">
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="col-2">
+
+
+                    @if (item.Photo != null)
+                    {
+                        <img src="@Url.Action("GetImage","Products", new { @id = item.SN })" width="200" class="shadow rounded">
+                    }
+                    else
+                    {
+                        <div class="picFrame">
+                            <iframe loading="lazy"
+                                    src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFcHqB1JiU&#x2F;view?embed">
+                            </iframe>
+                        </div>
+                    }
+                </td>
+                <td>
+                    <input class="GPID" value="@ViewBag.GPID" type="hidden" />
+                    <input class="PID" value="@item.SN" type="hidden" />
+                    <h3 class="PName"><strong>@Html.DisplayFor(modelItem => item.ProductName)</strong></h3>
+                </td>
+
+
+                <td>
+                    <h5 class="PPrice">@Html.DisplayFor(modelItem => item.UnitPrice)</h5>
+                </td>
+
+                <td>
+
+                    
+                        <span onclick="compute('minus',this)" class="btnMinus btn btn-sm border-secondary font-weight-bolder">─</span>
+                        <input class="Quanity w-25 text-center" name="Quanity" type="number" value="0" readonly width="10" />
+                        <span onclick="compute('plus',this)" class="btnPlus btn btn-sm border-secondary font-weight-bolder">+</span>
+                        <span>@Html.DisplayFor(modelItem => item.Unit)</span>
+                   
+                    <button type="button" class="btn btn-info " onclick="addCart(this)"><i class="bi bi-cart-plus-fill"></i></button>
+
+                </td>
+
+
+           
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+
+    @Html.ActionLink("查看購物車", "MyCart","Home", new { storeSN = Model.FirstOrDefault().StoreSN  }, new { @class = "btn btn-primary"})
+</div>
+<style>
+    .picFrame {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-top: 70.9459%;
+        padding-bottom: 0;
+        box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16);
+        overflow: hidden;
+        border-radius: 8px;
+        will-change: transform;
+    }
+
+        .picFrame > iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+</style>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.bundle.min.js"></script>
+<script>
+    //數量加減
+    function compute(type, e) {
+        let input = $($(e).parent()).find('input')
+       
+        resuslt = 0
+        //計算加減
+        if (type == 'minus') {
+            result = parseInt(input.val()) - 1
+        }
+        else {
+            result = parseInt(input.val()) + 1
+        }
+        //覆值
+        if (result >= 0)
+         {
+        input.val(result)
+        }
+      
+    }
+
+
+    //新增購物車
+    var cart = [];
+    if (localStorage.getItem("cart"))
+    {
+        cart = JSON.parse(localStorage.getItem("cart"));
+    }
+    function addCart(e)
+    {
+        let orders = $(e).closest('tr')
+        let newPID = orders.find('.PID').val();
+        let SameItem = cart.find(item => item.PID == newPID);
+        let currentQuanity = parseInt(orders.children().find('.Quanity').val());
+
+        if (SameItem == undefined) {
+           
+            setCart(orders, currentQuanity);
+        }
+        else
+        {
+            SameItem.Quanity = currentQuanity ;
+        }
+        console.log(cart);
+        localStorage.setItem("cart", JSON.stringify(cart))
+    }
+   
+    function setCart(orders, currentQuanity)
+    {
+        let Quanity = 0;
+
+        let newItem = {};
+        
+             newItem =
+            {
+
+                 GPID:orders.find('.GPID').val(),
+                 PID: orders.find('.PID').val(),
+                 PName: orders.find('.PName').text(),
+                 PPrice: orders.find('.PPrice').text(),
+                 Quanity: Quanity + currentQuanity
+            };
+        cart.push(newItem);
+      
+       
+     
+    }
+
+
+</script>

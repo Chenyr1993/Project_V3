@@ -11,17 +11,33 @@ namespace Project_try3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Orderdetails
     {
+        [Key]
         public int SN { get; set; }
+        [DisplayName("訂單編號")]
         public string OrderID { get; set; }
+        [DisplayName("品名")]
         public int ProductSN { get; set; }
+        [DisplayName("數量")]
+        [Required(ErrorMessage = "欄位必填")]
+        [Range(0, short.MaxValue, ErrorMessage = "數量不可小於0")]
+
         public int Quanity { get; set; }
+        [DisplayName("單價")]
+        [Range(0, short.MaxValue, ErrorMessage = "單價不可低於0元")]
+        [Required(ErrorMessage = "欄位必填")]
+        [DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode = false)]
         public decimal UnitPrice { get; set; }
+        [DisplayName("折扣")]
         public Nullable<int> Discount { get; set; }
+        [DisplayName("小計")]
+        [DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode = false)]
         public Nullable<decimal> Subtotal { get; set; }
-    
+
         public virtual Orders Orders { get; set; }
         public virtual Products Products { get; set; }
     }

@@ -23,25 +23,30 @@ namespace Project_try3.Models
             this.Stores = new HashSet<Stores>();
         }
         [Key]
-        [DisplayName("員工編號")]
+        [DisplayName("管理員編號")]
         public int SN { get; set; }
-        [DisplayName("使用者編號")]
+        [DisplayName("帳號")]
         public int UserSN { get; set; }
         [DisplayName("姓名")]
-        [Required]
+        [Required(ErrorMessage = "必填欄位")]
+        [MaxLength(30, ErrorMessage = "字數上限為30字")]
         public string Name { get; set; }
         [DisplayName("職稱")]
-        [Required]
+        [Required(ErrorMessage = "必填欄位")]
+        [MaxLength(10, ErrorMessage = "字數上限10字")]
         public string Title { get; set; }
         [DisplayName("電話")]
-        [Required]
+        [Required(ErrorMessage = "必填欄位")]
         public string Phone { get; set; }
         [DisplayName("分機")]
+        [MaxLength(10, ErrorMessage = "字數上限10字")]
+
         public string Extension { get; set; }
-        [DisplayName("信箱")]
-        [Required]
+        [DisplayName("電子信箱")]
+        [Required(ErrorMessage = "必填欄位")]
+        [MaxLength(100, ErrorMessage = "字數上限100字")]
         public string Email { get; set; }
-    
+
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Manage> Manage { get; set; }

@@ -11,7 +11,9 @@ namespace Project_try3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Delivery
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +21,13 @@ namespace Project_try3.Models
         {
             this.GroupBuying = new HashSet<GroupBuying>();
         }
-    
+        [Key]
         public int SN { get; set; }
+        [DisplayName("取貨方式")]
+        [Required(ErrorMessage = "欄位必填")]
+        [MaxLength(10, ErrorMessage = "字數上限10字")]
         public string Method { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GroupBuying> GroupBuying { get; set; }
     }

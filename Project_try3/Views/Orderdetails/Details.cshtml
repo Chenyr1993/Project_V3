@@ -1,0 +1,67 @@
+﻿@model Project_try3.Models.Orderdetails
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Orderdetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Quanity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quanity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subtotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subtotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Orders.GroupBuyingID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Orders.GroupBuyingID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Products.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Products.ProductName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SN }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

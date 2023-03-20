@@ -18,7 +18,7 @@ namespace Project_try3.Controllers
     {
         private Project_V3Entities db = new Project_V3Entities();
         SetData sd = new SetData();
-        
+
         // GET: Products
         public ActionResult Index()
         {
@@ -59,49 +59,49 @@ namespace Project_try3.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (file == null)
-                {
-                    products.PhotoType = null;
-                    products.Photo = null;
-                }
-                else
-                {
+                //byte[] photo = null;
+                string Sql = "INSERT INTO Products ( ProductName, Stock, Unit, UnitPrice, Discontinued, Photo,PhotoType, CreatedDate, CategorySN, StoreSN) " +
+                   "VALUES (@ProductName, @Stock, @Unit, @UnitPrice, @Discontinued, CONVERT(varbinary(max),@Photo),@PhotoType, @CreatedDate, @CategorySN, @StoreSN)";
+                if (file != null)
+                {//如果新增無圖片資料無法通過
+
+
                     products.Photo = new byte[file.ContentLength];
-                                                 //設定偏移量
+                    //設定偏移量
                     file.InputStream.Read(products.Photo, 0, file.ContentLength);
                     products.PhotoType = file.ContentType;
                 }
-               
+                products.CreatedDate = DateTime.Now;
 
-                string Sql = "INSERT INTO Products ( ProductName, Stock, Unit, UnitPrice, Discontinued, Photo,PhotoType, CreatedDate, CategorySN, StoreSN) " +
-                    "VALUES (@ProductName, @Stock, @Unit, @UnitPrice, @Discontinued, @Photo,@PhotoType, @CreatedDate, @CategorySN, @StoreSN)";
-                     List<SqlParameter> list = new List<SqlParameter>
+                List<SqlParameter> list = new List<SqlParameter>
                     {
                     new SqlParameter("ProductName", products.ProductName),
                     new SqlParameter("Stock", products.Stock),
                     new SqlParameter("Unit", products.Unit),
                     new SqlParameter("UnitPrice", products.UnitPrice),
                     new SqlParameter("Photo", products.Photo),
+
                     new SqlParameter("PhotoType",products.PhotoType),
                     new SqlParameter("Discontinued", products.Discontinued),
                     new SqlParameter("CreatedDate", products.CreatedDate),
                     new SqlParameter("CategorySN", products.CategorySN),
-                    new SqlParameter("StoreSN", products.StoreSN)
+                    new SqlParameter("StoreSN", products.StoreSN),
+                    new SqlParameter("SN", products.SN)
                     };
 
-               
-                    sd.executeSql(Sql, list);
-                    return RedirectToAction("Index");
+
+                sd.executeSql(Sql, list);
+                return RedirectToAction("Index");
             }
 
-                ViewBag.CategorySN = new SelectList(db.Category, "SN", "CategoryName", products.CategorySN);
-                ViewBag.StoreSN = new SelectList(db.Stores, "SN", "Name", products.StoreSN);
-                return View(products);
+            ViewBag.CategorySN = new SelectList(db.Category, "SN", "CategoryName", products.CategorySN);
+            ViewBag.StoreSN = new SelectList(db.Stores, "SN", "Name", products.StoreSN);
+            return View(products);
         }
 
-       
+        //負向表列只有這個不需要logincheck
+        [LoginCheck(flag = false)]
         //存取照片方法
-
         public FileContentResult GetImage(int? id)
         {
             var photo = db.Products.Find(id);
@@ -112,7 +112,7 @@ namespace Project_try3.Controllers
             return null;
         }
 
-   
+
 
 
         // GET: Products/Edit/5
@@ -129,6 +129,8 @@ namespace Project_try3.Controllers
             }
             ViewBag.CategorySN = new SelectList(db.Category, "SN", "CategoryName", products.CategorySN);
             ViewBag.StoreSN = new SelectList(db.Stores, "SN", "Name", products.StoreSN);
+
+
             return View(products);
         }
 
@@ -137,14 +139,28 @@ namespace Project_try3.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SN,ProductName,Stock,Unit,UnitPrice,Discontinued,Photo,PhotoType,CreatedDate,CategorySN,StoreSN")] Products products)
+        public ActionResult Edit(Products products, HttpPostedFileBase file, DateTime dt)
         {
             if (ModelState.IsValid)
             {
+                if (file == null)
+                {
+                    products.PhotoType = null;
+                    products.Photo = null;
+                }
+                else
+                {
+                    products.Photo = new byte[file.ContentLength];
+                    //設定偏移量
+                    file.InputStream.Read(products.Photo, 0, file.ContentLength);
+                    products.PhotoType = file.ContentType;
+                }
+                products.CreatedDate = dt;
                 db.Entry(products).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             ViewBag.CategorySN = new SelectList(db.Category, "SN", "CategoryName", products.CategorySN);
             ViewBag.StoreSN = new SelectList(db.Stores, "SN", "Name", products.StoreSN);
             return View(products);

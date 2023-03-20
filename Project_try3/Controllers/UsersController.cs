@@ -50,14 +50,22 @@ namespace Project_try3.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Users users)
+        public ActionResult Create(Users users)
         {
             if (ModelState.IsValid)
             {
-                users.CreatedDate=DateTime.Now;
-                
+                users.CreatedDate = DateTime.Now;
                 db.Users.Add(users);
-           
+                //new Users(){
+
+                //SN = users.SN,
+                //    Account = users.Account,
+                //    Password = users.Password,
+                //AuthSN = users.AuthSN,
+                //CreatedDate = DateTime.Now,
+                //Enabled = users.Enabled
+                //}
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -87,7 +95,7 @@ namespace Project_try3.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SN,Account,Password,CreatedDate,AuthSN,Enabled")] Users users,DateTime cd)
+        public ActionResult Edit([Bind(Include = "SN,Account,Password,CreatedDate,AuthSN,Enabled")] Users users, DateTime cd)
         {
             if (ModelState.IsValid)
             {

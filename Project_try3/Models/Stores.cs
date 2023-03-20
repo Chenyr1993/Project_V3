@@ -11,7 +11,9 @@ namespace Project_try3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Stores
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,17 +23,37 @@ namespace Project_try3.Models
             this.GroupBuying = new HashSet<GroupBuying>();
             this.Products = new HashSet<Products>();
         }
-    
+
+        [Key]
+        [DisplayName("商店編號")]
         public int SN { get; set; }
+        [DisplayName("協助人員")]
         public int AdminSN { get; set; }
+        [DisplayName("負責人")]
         public Nullable<int> MemberSN { get; set; }
+        [DisplayName("店名")]
+        [StringLength(50, ErrorMessage = "店名不可超過50字")]
+        [Required(ErrorMessage = "欄位必填")]
         public string Name { get; set; }
+        [DisplayName("聯絡電話")]
+        [StringLength(13, MinimumLength = 7, ErrorMessage = "電話號碼不可超過13字")]
+        [Required(ErrorMessage = "欄位必填")]
         public string Phone { get; set; }
+        [DisplayName("地址")]
+        [Required(ErrorMessage = "欄位必填")]
+        [StringLength(50, MinimumLength = 14, ErrorMessage = "地址字數不可超過50字")]
         public string Address { get; set; }
+        [DisplayName("商店描述")]
+        [StringLength(200, ErrorMessage = "商店描述不可超過200字")]
         public string Description { get; set; }
+        [DisplayName("加入平台日期")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        [DisplayName("營業狀態")]
+        [Required(ErrorMessage = "欄位必填")]
+        [StringLength(30, ErrorMessage = "字數不可超過30字")]
         public string Status { get; set; }
-    
+
         public virtual Admin Admin { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comments> Comments { get; set; }

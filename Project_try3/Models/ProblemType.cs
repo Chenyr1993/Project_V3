@@ -11,7 +11,9 @@ namespace Project_try3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ProblemType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +21,15 @@ namespace Project_try3.Models
         {
             this.Manage = new HashSet<Manage>();
         }
-    
+
+        [Key]
+        [DisplayName("問題類型代碼")]
         public int SN { get; set; }
+        [DisplayName("問題類型")]
+        [StringLength(30, ErrorMessage = "字數上限為30字")]
+        [Required(ErrorMessage = "欄位必填")]
         public string Type { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Manage> Manage { get; set; }
     }

@@ -6,10 +6,11 @@ using System.Web.Mvc;
 
 namespace Project_try3.Controllers
 {
-    public class LoginCheck:ActionFilterAttribute
+    public class LoginCheck : ActionFilterAttribute
     {
-        public bool flag { get; set; }
-        public short id = 2;
+        //旗標控制 設定布林值
+        public bool flag = true;
+
         void LoginState(HttpContext context)
         {
             if (context.Session["user"] == null)

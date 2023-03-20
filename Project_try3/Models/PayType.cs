@@ -11,7 +11,9 @@ namespace Project_try3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class PayType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,10 +22,15 @@ namespace Project_try3.Models
             this.GroupBuying = new HashSet<GroupBuying>();
             this.Orders = new HashSet<Orders>();
         }
-    
+
+        [Key]
+        [DisplayName("付款方式代碼")]
         public int SN { get; set; }
+        [DisplayName("付款方式")]
+        [Required]
+        [StringLength(10, ErrorMessage = "字數上限為10字")]
         public string Method { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GroupBuying> GroupBuying { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

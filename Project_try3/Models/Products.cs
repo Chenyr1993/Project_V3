@@ -13,7 +13,6 @@ namespace Project_try3.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using System.Drawing;
 
     public partial class Products
     {
@@ -22,29 +21,41 @@ namespace Project_try3.Models
         {
             this.Orderdetails = new HashSet<Orderdetails>();
         }
-        [DisplayName("產品編號")]
+
+        [Key]
+        [DisplayName("商品編號")]
         public int SN { get; set; }
         [DisplayName("品名")]
+        [Required]
+        [MaxLength(100, ErrorMessage = "字數上限為100字")]
         public string ProductName { get; set; }
         [DisplayName("庫存")]
+        [Range(0, short.MaxValue, ErrorMessage = "庫存不可小於0")]
+        [Required]
         public int Stock { get; set; }
         [DisplayName("單位")]
+        [Required]
+        [MaxLength(4, ErrorMessage = "字數上限為4字")]
         public string Unit { get; set; }
         [DisplayName("單價")]
-        
+        [Required]
+        //[DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = false)]
         public decimal UnitPrice { get; set; }
+        [DisplayName("已下架")]
         public Nullable<bool> Discontinued { get; set; }
-        [DisplayName("照片")]
+        [DisplayName("商品照片")]
         public byte[] Photo { get; set; }
-        [DisplayName("照片格式")]
+        [DisplayName("商品照片格式")]
+        [MaxLength(10, ErrorMessage = "字數上限為10字")]
         public string PhotoType { get; set; }
         [DisplayName("建立日期")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> CreatedDate { get; set; }
         [DisplayName("種類")]
         public int CategorySN { get; set; }
-        [DisplayName("所屬店家")]
+        [DisplayName("商店")]
         public int StoreSN { get; set; }
-    
+
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orderdetails> Orderdetails { get; set; }

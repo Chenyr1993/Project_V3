@@ -11,17 +11,25 @@ namespace Project_try3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Manage
     {
+        [Key]
         public int SN { get; set; }
+        [DisplayName("問題類型")]
+        [Required(ErrorMessage = "請選擇問題類型")]
         public int TypeSN { get; set; }
+        [DisplayName("詳細內容")]
+        [Required(ErrorMessage = "欄位必填")]
+        [MaxLength(150, ErrorMessage = "字數上限為150字")]
         public string Details { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> DealDate { get; set; }
         public Nullable<int> AdminSN { get; set; }
         public int MemberSN { get; set; }
-    
+
         public virtual Admin Admin { get; set; }
         public virtual Members Members { get; set; }
         public virtual ProblemType ProblemType { get; set; }

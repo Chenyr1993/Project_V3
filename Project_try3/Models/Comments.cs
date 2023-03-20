@@ -11,15 +11,25 @@ namespace Project_try3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Comments
     {
+        [Key]
         public int SN { get; set; }
+        [DisplayName("評論內容")]
+        [Required(ErrorMessage = "欄位必填")]
+        [MaxLength(200, ErrorMessage = "字數上限200字")]
         public string Comment { get; set; }
+        [DisplayName("發布日期")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        [DisplayName("評論人")]
         public int MemberSN { get; set; }
+        [DisplayName("店家")]
         public int StoreSN { get; set; }
-    
+
         public virtual Members Members { get; set; }
         public virtual Stores Stores { get; set; }
     }

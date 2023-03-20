@@ -11,7 +11,9 @@ namespace Project_try3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,14 +22,36 @@ namespace Project_try3.Models
             this.Admin = new HashSet<Admin>();
             this.Members = new HashSet<Members>();
         }
-    
+
+        [Key]
         public int SN { get; set; }
+        [DisplayName("帳號")]
+        [StringLength(50, ErrorMessage = "字數最多50字")]
+        [Required(ErrorMessage = "欄位必填")]
+
         public string Account { get; set; }
-        public string Password { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
+
+        string password = "";
+        [DisplayName("密碼")]
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "欄位必填")]
+        [StringLength(5, MinimumLength = 16, ErrorMessage = "請輸入5-16字")]
+
+        public string Password
+        {
+            get { return password; }
+            set { password = hashPw.getHashPwd(value); }
+        }
+        [DisplayName("加入時間")]
+        [ReadOnly(isReadOnly: true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public System.DateTime CreatedDate { get; set; }
+        [DisplayName("權限")]
+        [Required(ErrorMessage = "欄位必填")]
         public int AuthSN { get; set; }
+        [DisplayName("使用中")]
         public bool Enabled { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Admin> Admin { get; set; }
         public virtual Auth Auth { get; set; }

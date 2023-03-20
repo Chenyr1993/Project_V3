@@ -11,7 +11,9 @@ namespace Project_try3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Auth
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +21,13 @@ namespace Project_try3.Models
         {
             this.Users = new HashSet<Users>();
         }
-    
+        [Key]
         public int SN { get; set; }
+        [DisplayName("權限")]
+        [Required]
+        [MaxLength(10, ErrorMessage = "不可超過10字")]
         public string AuthName { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Users> Users { get; set; }
     }

@@ -11,7 +11,9 @@ namespace Project_try3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Orders
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,14 +21,22 @@ namespace Project_try3.Models
         {
             this.Orderdetails = new HashSet<Orderdetails>();
         }
-    
+        [Key]
         public string ID { get; set; }
+        [DisplayName("建立日期")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true)]
+
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        [DisplayName("付款方式")]
+        [Required(ErrorMessage = "請選擇付款方式")]
         public int PaySN { get; set; }
+        [DisplayName("已付款")]
         public bool Payed { get; set; }
+        [DisplayName("購買人")]
         public int CustomerSN { get; set; }
+        [DisplayName("團購代碼")]
         public string GroupBuyingID { get; set; }
-    
+
         public virtual GroupBuying GroupBuying { get; set; }
         public virtual Members Members { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

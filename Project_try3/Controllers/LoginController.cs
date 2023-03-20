@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,16 +10,17 @@ using Project_try3.ViewModels;
 
 namespace Project_try3.Controllers
 {
-    [LoginCheck]
+
     public class LoginController : Controller
     {
-      Project_V3Entities db = new Project_V3Entities();
+        Project_V3Entities db = new Project_V3Entities();
         // GET: Login
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult Login() 
+
+        public ActionResult Login()
         {
             return View();
         }

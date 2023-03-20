@@ -11,17 +11,22 @@ using Project_try3.Models;
 
 namespace Project_try3.Controllers
 {
+
     public class MembersController : Controller
     {
         private Project_V3Entities db = new Project_V3Entities();
-        SetData sd= new SetData();
+        SetData sd = new SetData();
         // GET: Members
+        [LoginCheck]
+        //public ActionResult Index(int? id)
         public ActionResult Index()
-        {
+        {//不可以直接傳參數否則任何人都可以在網址上傳參數看內容
+            //var members = db.Members.Where(m=>m.UserSN==id).Include(m => m.Users).ToList();
             int id = ((Users)Session["user"]).Members.FirstOrDefault().SN;
             var members = db.Members.Find(id);
             return View(members);
         }
+
         public ActionResult Manager()
         {
             //給管理員的畫面
@@ -29,7 +34,9 @@ namespace Project_try3.Controllers
 
             return View(members);
         }
+
         // GET: Members/Details/5
+        [LoginCheck]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -88,8 +95,7 @@ namespace Project_try3.Controllers
             }
             return View(members);
         }
-  
-       
+        [LoginCheck]
         // GET: Members/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -111,13 +117,13 @@ namespace Project_try3.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SN,UserSN,Name,Phone,Email,Address")] Members members)
+        public ActionResult Edit(Members members)
         {
             if (ModelState.IsValid)
             {
                 //db.Entry(members).State = EntityState.Modified;
                 //db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index"/*, new {id=members.UserSN }*/);
             }
             ViewBag.UserSN = new SelectList(db.Users, "SN", "Account", members.UserSN);
             return View(members);
