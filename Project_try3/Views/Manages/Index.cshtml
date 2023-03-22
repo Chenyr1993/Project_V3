@@ -5,21 +5,21 @@
     Layout = "~/Views/Shared/_Layout _Manage.cshtml";
 }
 
-<h2>Index</h2>
+<h2 class="alert alert-primary text-center">會員問題列表</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Details)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
+           建立日期
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DealDate)
+            處理日期
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Admin.Name)
@@ -54,9 +54,9 @@
             @Html.DisplayFor(modelItem => item.ProblemType.Type)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SN }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SN }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SN })
+            @Html.ActionLink("編輯", "Edit", new { id=item.SN }) |
+            @Html.ActionLink("詳細說明", "Details", new { id=item.SN }) |
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.SN })*@
         </td>
     </tr>
 }

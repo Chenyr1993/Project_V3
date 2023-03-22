@@ -21,7 +21,8 @@ namespace Project_try3.Models
         public void executeSql(string Sql)
         {
             cmd.CommandText = Sql;
-            conn.Open();
+            if (conn.State != ConnectionState.Open) conn.Open();
+
             //寫入資料，如果讀取是ExecuteReader
             cmd.ExecuteNonQuery();
             cmd.Dispose();
@@ -44,8 +45,8 @@ namespace Project_try3.Models
                 }
                 cmd.Parameters.Add(p);
             }
+            if (conn.State != ConnectionState.Open) conn.Open();
 
-            conn.Open();
             cmd.ExecuteNonQuery();
             cmd.Dispose();
             conn.Close();

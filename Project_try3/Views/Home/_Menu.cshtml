@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Project_try3.Models.Products>
-@*@{
 
+@*@{
         string GpID;
         if (Model.FirstOrDefault().Orderdetails.FirstOrDefault().Orders.GroupBuyingID == null)
         {
@@ -10,7 +10,6 @@
         {
             GpID = Model.FirstOrDefault().Orderdetails.FirstOrDefault().Orders.GroupBuyingID;
         }
-
     }*@
 
 <table class="table ">
@@ -79,101 +78,96 @@
     </tbody>
 </table>
 
-@*<div class="text-center">
+<div class="text-center">
 
-    @Html.ActionLink("查看購物車", "MyCart", "Home", new { storeSN = Model.FirstOrDefault().StoreSN }, new { @class = "btn btn-primary" })
-</div>*@
-<style>
-    .picFrame {
-        position: relative;
-        width: 100%;
-        height: 0;
-        padding-top: 70.9459%;
-        padding-bottom: 0;
-        box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16);
-        overflow: hidden;
-        border-radius: 8px;
-        will-change: transform;
-    }
-
-        .picFrame > iframe {
-            position: absolute;
+        @Html.ActionLink("查看購物車", "MyCart","Home", new {storeSN=Model.FirstOrDefault().StoreSN }, new { @class = "btn btn-primary"})
+    </div>
+    <style>
+        .picFrame {
+            position: relative;
             width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            border: none;
-            padding: 0;
-            margin: 0;
-        }
-</style>
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/bootstrap.bundle.min.js"></script>
-@*<script>
-        //數量加減
-        function compute(type, e) {
-            let input = $($(e).parent()).find('input')
-
-            resuslt = 0
-            //計算加減
-            if (type == 'minus') {
-                result = parseInt(input.val()) - 1
-            }
-            else {
-                result = parseInt(input.val()) + 1
-            }
-            //覆值
-            if (result >= 0)
-             {
-            input.val(result)
-            }
-
+            height: 0;
+            padding-top: 70.9459%;
+            padding-bottom: 0;
+            box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16);
+            overflow: hidden;
+            border-radius: 8px;
+            will-change: transform;
         }
 
-
-        //新增購物車
-        var cart = [];
-        if (localStorage.getItem("cart"))
-        {
-            cart = JSON.parse(localStorage.getItem("cart"));
-        }
-        function addCart(e)
-        {
-            let orders = $(e).closest('tr')
-            let newPID = orders.find('.PID').val();
-            let SameItem = cart.find(item => item.PID == newPID);
-            let currentQuanity = parseInt(orders.children().find('.Quanity').val());
-
-            if (SameItem == undefined) {
-
-                setCart(orders, currentQuanity);
+            .picFrame > iframe {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                border: none;
+                padding: 0;
+                margin: 0;
             }
-            else
+    </style>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+   @*<script>
+            //數量加減
+            function compute(type, e) {
+                let input = $($(e).parent()).find('input')
+
+                resuslt = 0
+                //計算加減
+                if (type == 'minus') {
+                    result = parseInt(input.val()) - 1
+                }
+                else {
+                    result = parseInt(input.val()) + 1
+                }
+                //覆值
+                if (result >= 0)
+                 {
+                input.val(result)
+                }
+
+            }
+
+
+            //新增購物車
+            var cart = [];
+            if (localStorage.getItem("cart"))
             {
-                SameItem.Quanity = currentQuanity ;
+                cart = JSON.parse(localStorage.getItem("cart"));
             }
-            console.log(cart);
-            localStorage.setItem("cart", JSON.stringify(cart))
-        }
+            function addCart(e)
+            {
+                let orders = $(e).closest('tr')
+                let newPID = orders.find('.PID').val();
+                let SameItem = cart.find(item => item.PID == newPID);
+                let currentQuanity = parseInt(orders.children().find('.Quanity').val());
 
-        function setCart(orders, currentQuanity)
-        {
-            let Quanity = 0;
+                if (SameItem == undefined) {
 
-            let newItem = {};
-
-                 newItem =
+                    setCart(orders, currentQuanity);
+                }
+                else
                 {
-                     PID: orders.find('.PID').val(),
-                    PName: orders.find('.PName').text(),
-                    PPrice: orders.find('.PPrice').text(),
-                     Quanity: Quanity + currentQuanity
-                };
-            cart.push(newItem);
+                    SameItem.Quanity = currentQuanity ;
+                }
+                console.log(cart);
+                localStorage.setItem("cart", JSON.stringify(cart))
+            }
 
+            function setCart(orders, currentQuanity)
+            {
+                let Quanity = 0;
 
+                let newItem = {};
 
-        }
-
-
-    </script>*@
+                     newItem =
+                    {
+                         PID: orders.find('.PID').val(),
+                        PName: orders.find('.PName').text(),
+                        PPrice: orders.find('.PPrice').text(),
+                         Quanity: Quanity + currentQuanity
+                    };
+                cart.push(newItem);
+            }
+         </script>*@

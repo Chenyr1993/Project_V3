@@ -5,11 +5,9 @@
     Layout = "~/Views/Shared/_Layout _Manage.cshtml";
 }
 
-<h2 class="text-center">會員資料管理作業</h2>
+<h2 class="text-center alert alert-primary">會員資料管理作業</h2>
 
-@*<p>
-    @Html.ActionLink("", "Create")
-</p>*@
+
 <table class="table text-secondary">
     <tr>
         <th>
@@ -48,7 +46,6 @@
             @Html.DisplayFor(modelItem => item.Users.Account)
         </td>
         <td>
-            @Html.ActionLink("修改會員資料", "Edit", new { id = item.SN },new { @class = "btn btn-secondary" }) |
             @*@Html.ActionLink("詳細內容", "Details", new { id=item.SN }) |*@
             @Html.ActionLink("刪除", "Delete", new { id = item.SN }, new { @class = "btn btn-danger", onclick = "return confirm('你確定要刪除" + item.Name + "的資料嗎？')" })
         </td>

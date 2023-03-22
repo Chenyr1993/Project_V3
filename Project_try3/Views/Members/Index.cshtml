@@ -6,60 +6,24 @@
 
 }
 
-<h2 class="text-center">會員列表</h2>
-<div class="container">
 
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SN)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Users.Account)
-            </th>
-            <th></th>
-        </tr>
+<div class="container ">
 
-        
+    <div class="card border-info mb-3 " >
+        <div class="card-header"></div>
+        <div class="card-body text-info">
+            <h3 class="card-title">@Html.DisplayFor(model => model.Name)</h3>
+            <h5 class="card-text">@Html.DisplayFor(model => model.Users.Account)</h5>
+            <h5 class="card-text">@Html.DisplayFor(model => model.Phone)</h5>
+            <h5 class="card-text">@Html.DisplayFor(model => model.Email)</h5>
+            <h5 class="card-text">@Html.DisplayFor(model => model.Address)</h5>
+            @Html.ActionLink("修改基本資料", "Edit", new { id = Model.SN }, new { @class = "btn btn-primary btn-block" })
+
+        </div>
        
-            <tr>
-                <td>
-                    @Html.DisplayFor(model => model.SN)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Users.Account)
-                </td>
-                <td>
-                    @Html.ActionLink("編輯", "Edit", new { id=Model.SN}, new { @class = "btn btn-primary" }) 
+    </div>
+ 
 
-                    @*@Html.ActionLink("刪除", "Delete", new { id = item.SN }, new { @class = "btn btn-danger", onclick = "return confirm('你確定要刪除" + item.Name + "的資料嗎？')" })*@
-                </td>
-            </tr>
-        
+          
 
-    </table>
 </div>

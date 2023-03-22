@@ -36,8 +36,12 @@
     <div class="form-group">
         @Html.LabelFor(model => model.PaySN, "PaySN", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("PaySN", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.PaySN, "", new { @class = "text-danger" })
+            @*@Html.DropDownList("PaySN", null, htmlAttributes: new { @class = "form-control" })*@
+            <select class="form-control" id="PaySN" name="PaySN">
+                <option value="1">現金支付</option>
+                <option value="2">線上刷卡</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.PaySN, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -69,7 +73,7 @@
         @Html.LabelFor(model => model.GroupBuyingID, "GroupBuyingID", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @*@Html.DropDownList("GroupBuyingID", null, htmlAttributes: new { @class = "form-control" })*@
-            <input class="form-control" id="GroupBuyingID" name="GroupBuyingID" value="" readonly="readonly" />
+            <input class="form-control" id="GroupBuyingID" name="GroupBuyingID" value=""  />
             @Html.ValidationMessageFor(model => model.GroupBuyingID, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -92,9 +96,13 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script>
 console.log(localStorage.getItem("cart"))
+       
+        if (localStorage.getItem("cart")) {
+            $('#cartData').val(localStorage.getItem("cart"))
+        }
+      
+        var cartItem = JSON.parse(localStorage.getItem("cart"));
 
-var cartItem = JSON.parse(localStorage.getItem("cart"))
-console.log(cartItem[0]["GPID"])
-$('#GroupBuyingID').val(cartItem[0].GPID)
+        $('#GroupBuyingID').val(cartItem[0].GPID)
 
     </script>

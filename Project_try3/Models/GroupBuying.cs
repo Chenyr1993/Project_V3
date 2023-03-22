@@ -42,7 +42,7 @@ namespace Project_try3.Models
         [DisplayName("描述說明")]
         [MaxLength(200, ErrorMessage = "字數上限200字")]
         public string Description { get; set; }
-        [DisplayName("送單時間")]
+        [DisplayName("取餐時間")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "請選擇日期時間")]
         public System.DateTime RequireDate { get; set; }
@@ -53,9 +53,9 @@ namespace Project_try3.Models
         public System.DateTime CloseDate { get; set; }
 
         [DisplayName("送貨地址")]
-        [Required(ErrorMessage = "欄位必填")]
+        
         [MaxLength(50, ErrorMessage = "字數上限50字")]
-        [MinLength(14, ErrorMessage = "字數不可低於14個字")]
+      
         public string ShipAddress { get; set; }
         [DisplayName("取貨方式")]
         [Required(ErrorMessage = "請選擇取貨方式")]
@@ -66,7 +66,7 @@ namespace Project_try3.Models
         [DisplayName("最低成團數量")]
         [Range(0, short.MaxValue, ErrorMessage = "數量不可小於0")]
         public Nullable<int> LimitNumber { get; set; }
-        [DisplayName("開團狀態")]
+        [DisplayName("開團中")]
         public bool Continued { get; set; }
         [DisplayName("付款方式")]
         [Required(ErrorMessage = "請選擇取貨方式")]

@@ -22,7 +22,6 @@
     <div class="form-group">
         @Html.LabelFor(model => model.GroupBuying.StoreSN, "選擇餐廳", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-
             <input id="storeSN" name="storeSN" class="form-control" value="@ViewBag.storeSN" hidden />
             <input value="@ViewBag.StoreName" class="form-control" readonly="readonly" />
             @Html.ValidationMessageFor(model => model.GroupBuying.StoreSN, "", new { @class = "text-danger" })
@@ -30,12 +29,11 @@
     </div>
 
 
-
     <div class="form-group">
-        @Html.LabelFor(model => model.GroupBuying.CreatedPerson, "訂購人", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.GroupBuying.CreatedPerson, "訂購姓名", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-
-            <input type="text" value=@memName class="form-control" readonly="readonly" />
+            @*@Html.EditorFor(model => model.CreatedPerson, new { id = Model.CreatedPerson }, new { value=memName})*@
+            <input type="text" value=@memName class="form-control" />
             @Html.ValidationMessageFor(model => model.GroupBuying.CreatedPerson, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -50,47 +48,35 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.CustomerSN, "收貨人", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="text" value="" class="form-control" />
-            @*@Html.EditorFor(model => model.CustomerSN, new { @class = "form-control" })*@
-            @Html.ValidationMessageFor(model => model.CustomerSN, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.GroupBuying.ShipAddress,"收貨地址", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.GroupBuying.ShipAddress, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @*@Html.EditorFor(model => model.ShipAddress, new { htmlAttributes = new { @class = "form-control" } })*@
             <div class="tw-city-selector" role="tw-city-selector" id="addressSelector" data-has-zipcode></div>
-            <input onclick="test()" class="form-control text-box single-line" data-val="true" data-val-required="送貨地址 欄位是必要項。"
+            <input onclick="test()" class="form-control text-box single-line" data-val="true" @*data-val-required="送貨地址 欄位是必要項。"*@
                    id="ShipAddress" name="GroupBuying.ShipAddress" type="text" value="" />
-            @Html.ValidationMessageFor(model => model.GroupBuying.ShipAddress, "", new { @class = "text-danger" })
+            @*@Html.ValidationMessageFor(model => model.GroupBuying.ShipAddress, "", new { @class = "text-danger" })*@
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.GroupBuying.DeliverySN, "取貨方式", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @*@Html.DropDownList("DeliverySN", null, htmlAttributes: new { @class = "form-control" })*@
             <select class="form-control" id="DeliverySN" name="GroupBuying.DeliverySN">
                 <option value="1">外帶自取</option>
                 <option value="2">店家外送</option>
             </select>
+            @*@Html.DropDownList("DeliverySN", null, htmlAttributes: new { @class = "form-control" })*@
             @Html.ValidationMessageFor(model => model.GroupBuying.DeliverySN, "", new { @class = "text-danger" })
         </div>
     </div>
-
-
-
-    @* 訂單欄位 *@
-
     <div class="form-group">
-        @Html.LabelFor(model => model.PaySN, "PaySN", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.PaySN, "付款方式", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("PaySN", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.PaySN, "", new { @class = "text-danger" })
         </div>
     </div>
+
 
     <div class="form-group" hidden>
         @Html.LabelFor(model => model.Payed, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -102,14 +88,23 @@
         </div>
     </div>
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.CustomerSN, "收件姓名", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" value=@memName class="form-control" />
+            @*@Html.EditorFor(model => model.CustomerSN, new { @class = "form-control" })*@
+            @Html.ValidationMessageFor(model => model.CustomerSN, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
     <!--<div class="form-group" hidden>
         Html.LabelFor(model => model.GroupBuyingID, "GroupBuyingID", htmlAttributes: new { class = "control-label col-md-2" })
         <div class="col-md-10">-->
-            @*@Html.DropDownList("GroupBuyingID", null, htmlAttributes: new { @class = "form-control" })*@
-            <!--Html.ValidationMessageFor(model => model.GroupBuyingID, "", new { class = "text-danger" })
+    @*@Html.DropDownList("GroupBuyingID", null, htmlAttributes: new { @class = "form-control" })*@
+    <!--Html.ValidationMessageFor(model => model.GroupBuyingID, "", new { class = "text-danger" })
         </div>
     </div>-->
+
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -141,5 +136,10 @@
         let address = zipcode.val() + county.val() + district.val()
         $("#ShipAddress").val(address)
         }
+   
+        console.log(localStorage.getItem("cart"))
 
+        if (localStorage.getItem("cart")) {
+            $('#cartData').val(localStorage.getItem("cart"))
+        }
 </script>

@@ -22,17 +22,13 @@ namespace Project_try3.Controllers
         }
 
         // GET: Stores/Details/5
-        public ActionResult Details(int? id, string GpID)
+        public ActionResult Details(int? id,string GPID)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Stores stores = db.Stores.Find(id);
-            //if (GpID != null) 
-            //{
-            //    stores = (Stores)db.Stores.Where(s => s.SN == id).Where(s => s.GroupBuying.FirstOrDefault().ID == GpID);
-            //}
             if (stores == null)
             {
                 return HttpNotFound();
@@ -41,9 +37,9 @@ namespace Project_try3.Controllers
         }
 
         //GP
-        public ActionResult DetailsforGP(int? id, string GroupBuyId)
+        public ActionResult DetailsforGP(int? id,string GroupBuyId)
         {
-            if (id == null)
+            if (id == null || GroupBuyId==null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -52,8 +48,7 @@ namespace Project_try3.Controllers
             {
                 return HttpNotFound();
             }
-            var store = stores.GroupBuying.Where(s => s.ID ==GroupBuyId).ToList();
-          
+            stores= db.Stores.Find(id, GroupBuyId);
             return View(stores);
         }
 

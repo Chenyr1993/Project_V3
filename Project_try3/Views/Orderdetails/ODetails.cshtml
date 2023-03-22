@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<Project_try3.Models.Orderdetails>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ODetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>訂單明細</h2>
 
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
 <table class="table">
     <tr>
         <th>
@@ -54,9 +54,9 @@
             @Html.DisplayFor(modelItem => item.Products.ProductName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SN }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SN }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SN })
+            @Html.ActionLink("編輯", "Edit", new { id=item.SN }) |
+            @*@Html.ActionLink("Details", "Details", new { id=item.SN }) |*@
+            @Html.ActionLink("刪除", "Delete", new { id=item.SN })
         </td>
     </tr>
 }

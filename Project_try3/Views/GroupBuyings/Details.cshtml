@@ -2,130 +2,52 @@
 
 @{
     ViewBag.Title = "Details";
-   
+    string color = "text-success", title = "開團中";
+
+    if (Model.Continued != true)
+    {
+        color = "text-danger";
+        title = "已結束";
+    }
 }
 
-<h2>Details</h2>
 
+@Html.ActionLink("編輯", "Edit", new { id = Model.ID }, new {@class="btn btn-warning" }) 
 <div>
-    <h4>GroupBuying</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
+    <div class="jumbotron">
+        <h1 class="display-4 text-center text-primary">
+            <i class="bi bi-circle-fill @color" style="font-size:2.5rem" data-toggle="tooltip" data-placement="top" title=@title></i>@Html.DisplayFor(model => model.Title)
+        </h1>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
+        <p class="lead text-sm-center text-primary">@Html.DisplayFor(model => model.Stores.Name)</p>
+        <p class="lead text-sm-center"> @Html.DisplayFor(model => model.Description)</p>
+        <h5 class=""> 開團人：@Html.DisplayFor(model => model.Members.Name)</h5>
+        <h5 class=""> @Html.DisplayNameFor(model => model.ShipAddress)：@Html.DisplayFor(model => model.ShipAddress)</h5>
+        <hr class="my-4">
+        <div class="d-md-flex justify-content-around">
+            <p class=""> @Html.DisplayNameFor(model => model.CreatedDate)：@Html.DisplayFor(model => model.CreatedDate)</p>
+            <p class=""> @Html.DisplayNameFor(model => model.Startdate)：@Html.DisplayFor(model => model.Startdate)</p>
+            <p class=""> @Html.DisplayNameFor(model => model.RequireDate)：@Html.DisplayFor(model => model.RequireDate)</p>
+            <p class=""> @Html.DisplayNameFor(model => model.CloseDate)：@Html.DisplayFor(model => model.CloseDate)</p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Startdate)
-        </dt>
+        </div>
+        <div class="d-md-flex justify-content-around">
+            <p class=""> @Html.DisplayNameFor(model => model.LimitMoney)：@Html.DisplayFor(model => model.LimitMoney)</p>
+            <p class=""> @Html.DisplayNameFor(model => model.LimitNumber)：@Html.DisplayFor(model => model.LimitNumber)</p>
+            <p class=""> @Html.DisplayNameFor(model => model.Delivery.Method)：@Html.DisplayFor(model => model.Delivery.Method)</p>
+            <p class=""> @Html.DisplayNameFor(model => model.PayType.Method)：@Html.DisplayFor(model => model.PayType.Method)</p>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Startdate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RequireDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RequireDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CloseDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CloseDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ShipAddress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ShipAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LimitMoney)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LimitMoney)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LimitNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LimitNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Continued)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Continued)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Delivery.Method)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Delivery.Method)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Members.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Members.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PayType.Method)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PayType.Method)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Stores.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Stores.Name)
-        </dd>
-
-    </dl>
+    </div>
+    @*@Html.Action("_DetailsforGP", "Orders", new { id = Model.ID })*@
 </div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+
+    @Html.ActionLink("回到我的團購清單", "Display")
 </p>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>

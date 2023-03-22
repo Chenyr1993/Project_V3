@@ -133,15 +133,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="儲存" class="btn btn-primary" />
+                <input type="submit" value="儲存" class="btn btn-primary " />
+                @Html.ActionLink("取消", "Details", new {id=Model.ID},new { @class= "btn btn-secondary" })
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("返回我的團購訂單", "Display", new {id=Model.CreatedPerson })
-</div>
+
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>

@@ -38,11 +38,11 @@ namespace Project_try3.Controllers
 
         // GET: Comments/Create
         [LoginCheck]
-        public ActionResult Create()
+        public ActionResult _Create()
         {
             ViewBag.MemberSN = new SelectList(db.Members, "SN", "Name");
             ViewBag.StoreSN = new SelectList(db.Stores, "SN", "Name");
-            return View();
+            return PartialView();
         }
 
         // POST: Comments/Create
@@ -50,13 +50,13 @@ namespace Project_try3.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SN,Comment,CreatedDate,MemberSN,StoreSN")] Comments comments)
+        public ActionResult _Create([Bind(Include = "SN,Comment,CreatedDate,MemberSN,StoreSN")] Comments comments)
         {
             if (ModelState.IsValid)
             {
                 db.Comments.Add(comments);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View();
             }
 
             ViewBag.MemberSN = new SelectList(db.Members, "SN", "Name", comments.MemberSN);

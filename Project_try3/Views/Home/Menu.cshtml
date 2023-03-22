@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<Project_try3.Models.Products>
-    @using Project_try3.Models
-@*@{ 
-    var storeName= ((Stores)Session[ViewBag.StoreSN]).Name;
-}*@
+
 
 <table class="table ">
     <thead>
@@ -48,7 +45,6 @@
                     }
                 </td>
                 <td>
-                    <input class="GPID" value="@ViewBag.GPID" type="hidden" />
                     <input class="PID" value="@item.SN" type="hidden" />
                     <h3 class="PName"><strong>@Html.DisplayFor(modelItem => item.ProductName)</strong></h3>
                 </td>
@@ -79,7 +75,7 @@
 
 <div class="text-center">
 
-    @Html.ActionLink("查看購物車", "MyCart","Home", new { storeSN = ViewBag.StoreSN }, new { @class = "btn btn-primary"})
+    @Html.ActionLink("查看購物車", "MyCart","Home", new { storeSN=Model.FirstOrDefault().StoreSN }, new { @class = "btn btn-primary"})
 </div>
 <style>
     .picFrame {
@@ -134,11 +130,9 @@
     if (localStorage.getItem("cart"))
     {
         cart = JSON.parse(localStorage.getItem("cart"));
-        let cartList = "";
-        
     }
     function addCart(e)
-    {//完成結帳動作要清購物車
+    {
         let orders = $(e).closest('tr')
         let newPID = orders.find('.PID').val();
         let SameItem = cart.find(item => item.PID == newPID);
@@ -164,18 +158,16 @@
         
              newItem =
             {
-
-                 GPID:orders.find('.GPID').val(),
                  PID: orders.find('.PID').val(),
-                 PName: orders.find('.PName').text(),
-                 PPrice: orders.find('.PPrice').text(),
+                PName: orders.find('.PName').text(),
+                PPrice: orders.find('.PPrice').text(),
                  Quanity: Quanity + currentQuanity
             };
         cart.push(newItem);
       
-
+       
+     
     }
-    console.log(orders)
 
 
 </script>

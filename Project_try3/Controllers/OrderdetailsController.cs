@@ -21,6 +21,12 @@ namespace Project_try3.Controllers
             return View(orderdetails.ToList());
         }
 
+        public ActionResult ODetails(string orderID)
+        {
+            var orderdetails = db.Orderdetails.Where(o=>o.OrderID==orderID).Include(o => o.Products);
+            return View(orderdetails.ToList());
+        }
+
         // GET: Orderdetails/Details/5
         public ActionResult Details(int? id)
         {
@@ -124,7 +130,7 @@ namespace Project_try3.Controllers
             Orderdetails orderdetails = db.Orderdetails.Find(id);
             db.Orderdetails.Remove(orderdetails);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ODetails");
         }
 
         protected override void Dispose(bool disposing)

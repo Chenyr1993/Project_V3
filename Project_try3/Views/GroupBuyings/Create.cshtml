@@ -23,7 +23,7 @@
             <h4>建立團購資料</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+            
 
             <div class="form-group">
                 @Html.LabelFor(model => model.StoreSN, "選擇餐廳", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -92,7 +92,7 @@
                 <div class="col-md-10">
                     @*@Html.EditorFor(model => model.ShipAddress, new { htmlAttributes = new { @class = "form-control" } })*@
                     <div class="tw-city-selector" role="tw-city-selector" id="addressSelector" data-has-zipcode></div>
-                    <input onclick="test()" class="form-control text-box single-line" data-val="true" data-val-required="送貨地址 欄位是必要項。"
+                    <input onclick="test()" class="form-control text-box single-line" data-val="true" 
                            id="ShipAddress" name="ShipAddress" type="text" value="" />
                     @Html.ValidationMessageFor(model => model.ShipAddress, "", new { @class = "text-danger" })
                 </div>

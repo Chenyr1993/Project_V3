@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout _Manage.cshtml";
 }
 
-<h2>店家列表</h2>
+<h2 class="alert alert-info text-center">商店列表</h2>
 
 <p>
-    @Html.ActionLink("新增店家", "Create")
+    @Html.ActionLink("新增", "Create", null, new { @class = "bi bi-file-plus btn btn-primary " })
 </p>
 
 <table class="table">
@@ -76,7 +76,7 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.SN }) |
                 @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Delete", "Delete", new { id = item.SN })
             </td>
         </tr>
     }

@@ -18,7 +18,7 @@ namespace Project_try3.Models
         //第一個參數利用下面方法傳值
         SqlCommand cmd = new SqlCommand("", conn);
         //3.建立資料讀取物件
-        SqlDataReader rd;
+        //SqlDataReader rd;
 
         //SqlDataAdapter只能讀取select無法做增刪修，要做增刪修只能使用SqlCommand
         SqlDataAdapter adp = new SqlDataAdapter("", conn);

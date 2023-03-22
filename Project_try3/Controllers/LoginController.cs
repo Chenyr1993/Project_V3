@@ -49,7 +49,8 @@ namespace Project_try3.Controllers
             }
             //顯示會員畫面(可以做在details)
             Session["user"] = result;
-            return RedirectToAction("Index", "Members");
+            
+            return RedirectToAction("Index", "Home");
         }
         public ActionResult Logout()
         {

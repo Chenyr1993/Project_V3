@@ -2,32 +2,25 @@
 @{
     ViewBag.Title = "MyCart";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-    //string action;
-    //string GpID;
-    //if (Model.FirstOrDefault().Orderdetails.FirstOrDefault().Orders.GroupBuyingID != null)
-    //{
-    //    action = "CreateforGP";
-    //    GpID = "GPID="+Model.FirstOrDefault().Orderdetails.FirstOrDefault().Orders.GroupBuyingID;
-    //}
-
-    //action = "Create";
-    //GpID = null;
+   
 
 }
 
-
-<h2 class="alert alert-success text-center">購物車</h2>
+<div class="alert alert-success">
+<h2  class="text-center">購物車</h2>
+<div class="small text-center" id="GroupBuyingID" name="GroupBuyingID"></div>
+</div>
 <div id="myCart">
 
 </div>
 <div class="text-right">
     <button id="renewCart" class="btn btn-primary"><i class="bi bi-cart-plus-fill" type="button" data-toggle="tooltip" data-placement="bottom" title="更新購物車"></i>更新購物車</button>
     <button id="clearCart" class="btn btn-warning"><i class="bi bi-cart-x-fill" type="button" data-toggle="tooltip" data-placement="bottom" title="清空購物車"></i> 清空購物車</button>
-    <a id="checkout" href="@Url.Action("CreateforGP","Orders",new { storeSN = Model.FirstOrDefault().StoreSN })" class="btn btn-success"><i class="bi bi-cash-coin" type="button" data-toggle="tooltip" data-placement="bottom" title="確定結帳"></i> 確定結帳</a>
+    <a id="checkout" value="@Model.FirstOrDefault().StoreSN"
+       href="" class="btn btn-success"><i class="bi bi-cash-coin" type="button" data-toggle="tooltip" data-placement="bottom" title="確定結帳"></i> 確定結帳</a>
 </div>
 <div>
-    <button class="btn btn-link"><i class="bi bi-arrow-90deg-left"></i>@Html.ActionLink("回到店家首頁 ", "Index", "Stores", null, null)</button>
+    <button class="btn btn-link"><i class="bi bi-arrow-90deg-left"></i>@Html.ActionLink("回首頁 ", "Index", "Home", null, null)</button>
 </div>
 @section script{
 
@@ -63,7 +56,7 @@
                     cartList +=
                         `<div class="media p-4 mb-3 border-bottom border-dark">
                                 <h2 class="align-self-center text-black-50 mr-5">${++c}</h2>
-                            <img src="/Products/GetImage/${item.PID}" class="mr-3" width="200" alt="...">
+                            
                                 <div class="media-body">
 
                                 <h5 class="mt-0"><strong>${item.PName}</strong></h5>
@@ -116,6 +109,20 @@
                 }
             }
         })
+
+        //找團購ID
+        var cartItem = JSON.parse(localStorage.getItem("cart")); 
+        let storeVal = $('#checkout').attr('value');
+        console.log(cartItem[0])
+        if (cartItem[0].GPID == undefined) {
+            $('#checkout').attr("href", "/Orders/Create?storeSN=" + storeVal);
+            $('#GroupBuyingID').remove();
+        }
+        else
+        {
+            $('#checkout').attr("href", "/Orders/CreateforGP?storeSN=" + storeVal);
+            $('#GroupBuyingID').html("團購單號" + cartItem[0].GPID);
+        }
     </script>
 }
 

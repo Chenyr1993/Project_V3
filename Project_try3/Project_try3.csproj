@@ -462,7 +462,6 @@
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\Products\Create.cshtml" />
-    <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
@@ -492,11 +491,9 @@
     <Content Include="Views\Deliveries\Details.cshtml" />
     <Content Include="Views\Deliveries\Edit.cshtml" />
     <Content Include="Views\Deliveries\Index.cshtml" />
-    <Content Include="Views\Shared\_Layout -Manage.cshtml" />
     <Content Include="Views\Home\_Menu.cshtml" />
     <Content Include="Views\Members\Manager.cshtml" />
-    <Content Include="Views\GroupBuyings\SingalCreate.cshtml" />
-    <Content Include="Views\Comments\Create.cshtml" />
+    <Content Include="Views\Comments\_Create.cshtml" />
     <Content Include="Views\Comments\Delete.cshtml" />
     <Content Include="Views\Comments\Details.cshtml" />
     <Content Include="Views\Comments\Edit.cshtml" />
@@ -519,11 +516,14 @@
     <Content Include="Views\Orders\Create.cshtml" />
     <Content Include="Views\Home\MenuforGP.cshtml" />
     <Content Include="Views\Home\MyCart.cshtml" />
-    <Content Include="Views\Home\MyCart forGP.cshtml" />
     <Content Include="Views\GroupBuyings\Display.cshtml" />
     <Content Include="Views\Shared\_Layout _Manage.cshtml" />
     <Content Include="Views\Stores\DetailsforGP.cshtml" />
     <Content Include="Views\Orderdetails\DetailsforGP.cshtml" />
+    <Content Include="Views\Orders\_DetailsforGP.cshtml" />
+    <Content Include="Views\Orders\IndexforGP.cshtml" />
+    <Content Include="Views\Home\Menu.cshtml" />
+    <Content Include="Views\Orderdetails\ODetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

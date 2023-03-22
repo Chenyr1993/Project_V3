@@ -34,24 +34,30 @@ namespace Project_try3.Controllers
 
             return PartialView(products);
         }
-
-        public ActionResult MenuforGP(int? storeSN,string GPID)
+        [LoginCheck]
+        public ActionResult Menu(int? storeSN)
         {
-            ViewBag.GPID = GPID;
             var products = db.Products.Where(p => p.StoreSN == storeSN ).Include(p => p.Category).ToList();
-            
+
             return View(products);
         }
 
-        public ActionResult MyCart(int? storeSN)
+        public ActionResult MenuforGP(int? storeSN, string GPID)
+        {
+            ViewBag.GPID = GPID;
+            ViewBag.StoreSN = storeSN;
+            var products = db.Products.Where(p => p.StoreSN == storeSN).Include(p => p.Category).ToList();
+
+            return View(products);
+        }
+
+        public ActionResult MyCart(int? storeSN) 
         {
             var cart = db.Products.Where(p => p.StoreSN == storeSN).ToList();
-            //if (GpID != null) 
-            //{
-            //    cart = db.Products.Where(c => c.StoreSN == id).Include(c => c.Orderdetails.FirstOrDefault().Orders.GroupBuyingID == GpID).ToList();
-            //}
             return View(cart);
+
         }
+
         public ActionResult MyCartforGP(int storeSN,string GPID)
         {
             //var i = db.Products.FirstOrDefault().Orderdetails.Where(o => o.Orders.GroupBuying.ID == id).ToList();

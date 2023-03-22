@@ -2,7 +2,7 @@
     string str = "", action = "";
     str = Session["user"] == null ? "登入" : "登出";
     action = Session["user"] == null ? "Login" : "Logout";
- }
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,20 +31,21 @@
 
                 <ul class="navbar-nav ">
 
-                    <li class="nav-item">@Html.ActionLink("商店", "Index", "Home", null, new { @class = "nav nav-link" })</li>
+                    @*<li class="nav-item">@Html.ActionLink("商店", "Index", "Home", null, new { @class = "nav nav-link" })</li>*@
                     @if (Session["user"] != null)
-                    {      
+                    {
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">會員專區</a>
                             <div class="dropdown-menu">
                                 @Html.ActionLink("個人資料管理", "Index", "Members", new { area = "" }, new { @class = "dropdown-item  " })
                                 @Html.ActionLink("我的團購紀錄", "Display", "GroupBuyings", new { area = "" }, new { @class = "dropdown-item  " })
-                                @Html.ActionLink("會員問題管理", "Manager", "Manage", new { area = "" }, new { @class = "dropdown-item  " })
+                                @Html.ActionLink("我的訂單紀錄", "IndexforGP", "Orders", new { area = "" }, new { @class = "dropdown-item  " })
+                                
                             </div>
                         </li>
                         <li class="nav-item">@Html.ActionLink("評論區", "Index", "Comments", null, new { @class = "nav nav-link" })</li>
                     }
-                    <li class="nav-item">@Html.ActionLink("常見問題", "Index", "Home", null, new { @class = "nav nav-link" })</li>
+                    <!--<li class="nav-item">-->@*@Html.ActionLink("常見問題", "Index", "Home", null, new { @class = "nav nav-link" })*@<!--</li>-->
 
                     <li class="nav-item  ">@Html.ActionLink(str, action, "Login", null, new { @class = " btn btn-warning " })</li>
                     <li class="nav-item ml-2 ">@Html.ActionLink("註冊", "Create", "Members", null, new { @class = " btn btn-primary " })</li>

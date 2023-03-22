@@ -38,7 +38,7 @@ namespace Project_try3.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: Categories/Create
@@ -52,7 +52,7 @@ namespace Project_try3.Controllers
             {
                 db.Category.Add(category);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
             }
 
             return View(category);
@@ -89,25 +89,7 @@ namespace Project_try3.Controllers
             return View(category);
         }
 
-        // GET: Categories/Delete/5
         public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Category category = db.Category.Find(id);
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-            return View(category);
-        }
-
-        // POST: Categories/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
         {
             Category category = db.Category.Find(id);
             db.Category.Remove(category);

@@ -1,17 +1,5 @@
 ﻿@model IEnumerable<Project_try3.Models.Orders>
 
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout _Manage.cshtml";
-    //var cartFlag = 0;
-    //if (TempData["cartFlag"] != null)
-    //{
-    //    cartFlag = 1;
-    //}
-}
-
-<h2 class="alert alert-primary text-center">訂單列表</h2>
-
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>*@
@@ -53,17 +41,11 @@
             @Html.DisplayFor(modelItem => item.PayType.Method)
         </td>
         <td>
-            @Html.ActionLink("編輯", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("詳細清單", "Details", "Orderdetails", new { id=item.ID }) |
-            @Html.ActionLink("刪除", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>
     </tr>
 }
 
 </table>
-@*<script>
-    if (@cartFlag===1)
-    {
-        localStorage.removeItem("cart")
-    }
-</script>*@

@@ -28,7 +28,7 @@ namespace Project_try3.Models
 
         [Key]
         public int SN { get; set; }
-        [DisplayName("帳號")]
+        [DisplayName("會員編號")]
         [Required(ErrorMessage = "欄位必填")]
         public int UserSN { get; set; }
         [DisplayName("姓名")]
@@ -45,7 +45,7 @@ namespace Project_try3.Models
         [DisplayName("Email")]
         [Required(ErrorMessage = "欄位必填")]
         [StringLength(100, ErrorMessage = "字數最多100字。")]
-        [DataType(DataType.Password)]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [DisplayName("地址")]

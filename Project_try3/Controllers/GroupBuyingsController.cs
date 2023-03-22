@@ -27,8 +27,8 @@ namespace Project_try3.Controllers
         public ActionResult Display()
         {
             int id = ((Users)Session["user"]).Members.FirstOrDefault().SN;
-            var groupBuying = db.GroupBuying.Include(g => g.Delivery).Where(g => g.Members.SN == id).Include(g => g.PayType).Include(g => g.Stores);
-
+            var groupBuying = db.GroupBuying.Include(g => g.Delivery).Where(g => g.Members.SN == id).Include(g => g.PayType).Include(g => g.Stores).OrderByDescending(g=>g.ID);
+            
             return View(groupBuying.ToList());
         }
 
@@ -44,6 +44,7 @@ namespace Project_try3.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(groupBuying);
         }
         [LoginCheck]
@@ -53,11 +54,9 @@ namespace Project_try3.Controllers
             ViewBag.DeliverySN = new SelectList(db.Delivery, "SN", "Method");
             ViewBag.CreatedPerson = new SelectList(db.Members, "SN", "Name");
             ViewBag.PaySN = new SelectList(db.PayType, "SN", "Method");
-            if (storeSN != null)
-            {
-                ViewBag.StoreSN = storeSN;
-                ViewBag.StoreName = db.Stores.Where(s => s.SN == storeSN).FirstOrDefault().Name;
-            }
+            ViewBag.StoreSN = storeSN;
+            ViewBag.StoreName = db.Stores.Where(s => s.SN == storeSN).FirstOrDefault().Name;
+            
 
             return View();
         }
@@ -68,19 +67,28 @@ namespace Project_try3.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(GroupBuying groupBuying, int storeSN, DateTime RequireDate, DateTime Startdate, DateTime CloseDate)
-        //public ActionResult Create( GroupBuying groupBuying,int storeSN )
-        {
+         {
             if (ModelState.IsValid)
             {
                 string sql = "select dbo.getGroupBuyID() as newID";
-                var gpID=gd.TableQuery(sql);
+                //var gpID = gd.TableQuery(sql).ToString();
+                var rs = gd.TableQuery(sql);
+                string gpID = "";
 
-                groupBuying.ID = gpID.ToString();
+                if (rs != null)
+                {
+                    DataRow drow= rs.Rows[0];
+                    gpID=drow["newID"].ToString();
+
+                }
+
+                groupBuying.ID = gpID;
                 groupBuying.StoreSN = storeSN;
                 groupBuying.CreatedDate = DateTime.Now;
                 groupBuying.Startdate = Startdate;
                 groupBuying.RequireDate = RequireDate;
                 groupBuying.CloseDate = CloseDate;
+                string address= groupBuying.ShipAddress == null ? "此筆訂單為外帶自取，無須填地址" : groupBuying.ShipAddress;
                 string descr = (groupBuying.Description) == null ? "無" : groupBuying.Description;
                 var money = groupBuying.LimitMoney == null ? 0 : groupBuying.LimitMoney;
                 var num = groupBuying.LimitNumber == null ? 0 : groupBuying.LimitNumber;
@@ -95,20 +103,20 @@ namespace Project_try3.Controllers
                     new SqlParameter("Startdate",groupBuying.Startdate),
                     new SqlParameter("CreatedPerson",memID),
                     new SqlParameter("Title",groupBuying.Title),
-                    new SqlParameter("Description",groupBuying.Description=descr),
+                    new SqlParameter("Description",descr),
                     new SqlParameter("RequireDate",groupBuying.RequireDate),
                     new SqlParameter("CloseDate",groupBuying.CloseDate),
-                    new SqlParameter("ShipAddress",groupBuying.ShipAddress),
+                    new SqlParameter("ShipAddress",address),
                     new SqlParameter("DeliverySN",groupBuying.DeliverySN),
-                    new SqlParameter("LimitMoney",groupBuying.LimitMoney=money),
-                    new SqlParameter("LimitNumber",groupBuying.LimitNumber=num),
+                    new SqlParameter("LimitMoney",money),
+                    new SqlParameter("LimitNumber",num),
                     new SqlParameter("Continued",groupBuying.Continued),
                     new SqlParameter("PaySN",groupBuying.PaySN)
                 };
 
-                sd.executeSqlBySP(sql2, list);
-                //return RedirectToAction("Details", "Stores", new {id=storeSN});
-                return RedirectToAction("MenuforGP","Home", new { storeSN=groupBuying.StoreSN ,GPID =groupBuying.ID});
+                sd.executeSql(sql2, list);
+                
+                return RedirectToAction("Display");
             }
 
             ViewBag.DeliverySN = new SelectList(db.Delivery, "SN", "Method", groupBuying.DeliverySN);
@@ -148,7 +156,7 @@ namespace Project_try3.Controllers
             {
                 db.Entry(groupBuying).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Display");
             }
             ViewBag.DeliverySN = new SelectList(db.Delivery, "SN", "Method", groupBuying.DeliverySN);
             ViewBag.CreatedPerson = new SelectList(db.Members, "SN", "Name", groupBuying.CreatedPerson);

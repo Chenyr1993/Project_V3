@@ -5,12 +5,13 @@
     Layout = "~/Views/Shared/_Layout _Manage.cshtml";
 }
 
-<h2>Index</h2>
+<h2 class="alert alert-info text-center">常見問題種類</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("新增", "Create",null,new { @class = "bi bi-file-plus btn btn-primary " })
+
 </p>
-<table class="table">
+<table class="table text-center">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Type)
@@ -24,9 +25,9 @@
             @Html.DisplayFor(modelItem => item.Type)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SN }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SN }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SN })
+            @Html.ActionLink("編輯", "Edit", new { id = item.SN }, new { @class = "btn btn-primary" })
+           
+            @Html.ActionLink("刪除", "Delete", new { id = item.SN }, new { @class = "btn btn-danger", onclick = "return confirm('確定要刪除資料？')" })
         </td>
     </tr>
 }

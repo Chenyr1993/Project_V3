@@ -44,7 +44,8 @@
                     </div>
 
                 </div>
-                @Html.ActionLink("開始團購", "Create", "GroupBuyings", new { storeSN = Model.SN }, new { @class = "btn btn-success ml-auto mr-auto" })
+                @Html.ActionLink("開始團購", "Create", "GroupBuyings", new { storeSN = Model.SN }, new { @class = "btn btn-success ml-auto mr-5" })
+                @Html.ActionLink("單筆訂購", "Menu", "Home", new { storeSN = Model.SN }, new { @class = "btn btn-primary mr-auto" })
             </div>
             <div>
                 <h5 class="text-center alert alert-info">商品項目</h5>

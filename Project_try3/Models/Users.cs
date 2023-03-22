@@ -35,7 +35,8 @@ namespace Project_try3.Models
         [DisplayName("密碼")]
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "欄位必填")]
-        [StringLength(5, MinimumLength = 16, ErrorMessage = "請輸入5-16字")]
+        [MinLength(5, ErrorMessage = "請輸入5-16字")]
+        [MaxLength(16, ErrorMessage = "請輸入5-16字")]
 
         public string Password
         {

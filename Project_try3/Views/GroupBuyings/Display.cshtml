@@ -5,109 +5,87 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>我的團購訂單</h2>
+<h2 class="text-center pt-2 pb-2">我的團購訂單</h2>
 
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>*@
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Startdate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.RequireDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CloseDate)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.ShipAddress)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.LimitMoney)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LimitNumber)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Continued)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Delivery.Method)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.Members.Name)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.PayType.Method)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Stores.Name)
-        </th>
-        <th></th>
-    </tr>
+<table class="table  table-hover align-middle table-striped">
+    <thead class="">
+        <tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Startdate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.RequireDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CloseDate)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.ShipAddress)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.LimitMoney)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LimitNumber)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.Continued)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Delivery.Method)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Members.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PayType.Method)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.Stores.Name)
-        </td>
-        <td>
-            @Html.ActionLink("詳細內容", "Details", new { id = item.ID }) |
-            @Html.ActionLink("編輯團購內容", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("刪除此筆團購", "Delete", new { id = item.ID })|
-            @Html.ActionLink("開始訂購商品", "MenuforGP","Home", new { storeSN = item.StoreSN, GPID = item.ID }, new {@class="btn btn-primary" }) |
-        </td>
-    </tr>
-}
+            <th>
+                團購單號
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Startdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
 
+
+            <th>
+                @Html.DisplayNameFor(model => model.CloseDate)
+            </th>
+
+            <th>
+                開團中
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Stores.Name)
+            </th>
+            <th class="col-md-2 col-sm-1">管理團購</th>
+        </tr>
+    </thead>
+    <tbody class="">
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Startdate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CloseDate)
+                </td>
+
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Continued)*@
+                    @if (item.Continued)
+                    {
+                        <h5 class="bi bi-toggle-on text-success " title="開團中" data-toggle="tooltip" data-placement="right"></h5>
+                    }
+                    else
+                    {
+                        <h5 class="bi bi-toggle-off text-danger " title="已關團" data-toggle="tooltip" data-placement="right"></h5>
+                    }
+                </td>
+
+                <td >
+                    @Html.DisplayFor(modelItem => item.Stores.Name)
+                </td>
+                <td class=" font-weight-bold ">
+                    @Html.ActionLink("\n", "Details", new { id = item.ID }, new { @class= "bi bi-layout-text-sidebar-reverse" }) 
+                    @Html.ActionLink("\n", "Edit", new { id = item.ID }, new {@class= " text- bi bi-pencil-square text-secondary" }) 
+                    @Html.ActionLink("\n", "Delete", new { id = item.ID }, new { @class= "text-danger bi bi-trash3-fill" })
+                    @Html.ActionLink("\n","MenuforGP", "Home", new { storeSN = item.StoreSN, GPID = item.ID }, new { @class = "text-primary bi bi-bag-plus" }) 
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>

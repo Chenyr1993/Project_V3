@@ -129,31 +129,16 @@ namespace Project_try3.Controllers
             return View(members);
         }
 
-        // GET: Members/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Members members = db.Members.Find(id);
-            if (members == null)
-            {
-                return HttpNotFound();
-            }
-            return View(members);
-        }
-
-        // POST: Members/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
+            db.GroupBuying.RemoveRange(db.GroupBuying.Where(g => g.CreatedPerson == id));
             Members members = db.Members.Find(id);
             db.Members.Remove(members);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Manager");
         }
+
+       
 
         protected override void Dispose(bool disposing)
         {

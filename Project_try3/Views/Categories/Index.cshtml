@@ -2,33 +2,56 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout _Manage.cshtml";
 }
 
-<h2>Index</h2>
+<h2 class="text-center alert alert-primary">商品種類列表</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <button type="button" id="ShowAddCate" class="btn btn-primary bi bi-file-earmark-plus " data-toggle="modal" data-target="#addCate">
+        新增種類
+    </button>
+    @*@Html.ActionLink("新增種類", "Create", null, new { @class = "btn btn-primary bi bi-file-earmark-plus" })*@
 </p>
-<table class="table">
+<div class="modal fade" id="addCate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">新增種類</h5>
+            </div>
+            <div class="modal-body ">
+                @Html.Action("Create", "Categories")
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table text-center">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SN)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.CategoryName)
         </th>
-        <th></th>
+        <th>管理</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SN }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SN }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SN })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("修改", "Edit", new { id = item.SN }, new { @class = "btn btn-warning" })
+
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.SN })*@
+                @Html.ActionLink("刪除", "Delete", new { id = item.SN }, new { @class = "btn btn-danger", onclick = "return confirm('確定刪除？')" })
+            </td>
+        </tr>
+    }
 
 </table>
