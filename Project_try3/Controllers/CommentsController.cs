@@ -52,6 +52,8 @@ namespace Project_try3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult _Create([Bind(Include = "SN,Comment,CreatedDate,MemberSN,StoreSN")] Comments comments)
         {
+            ViewBag.StoreSN = new SelectList(db.Stores, "SN", "Name", comments.StoreSN);
+            ViewBag.MemberSN = new SelectList(db.Members, "SN", "Name", comments.MemberSN);
             if (ModelState.IsValid)
             {
                 db.Comments.Add(comments);
@@ -59,8 +61,6 @@ namespace Project_try3.Controllers
                 return View();
             }
 
-            ViewBag.MemberSN = new SelectList(db.Members, "SN", "Name", comments.MemberSN);
-            ViewBag.StoreSN = new SelectList(db.Stores, "SN", "Name", comments.StoreSN);
             return View(comments);
         }
 

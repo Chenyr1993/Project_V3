@@ -40,7 +40,7 @@
                                 @Html.ActionLink("個人資料管理", "Index", "Members", new { area = "" }, new { @class = "dropdown-item  " })
                                 @Html.ActionLink("我的團購紀錄", "Display", "GroupBuyings", new { area = "" }, new { @class = "dropdown-item  " })
                                 @Html.ActionLink("我的訂單紀錄", "IndexforGP", "Orders", new { area = "" }, new { @class = "dropdown-item  " })
-                                
+
                             </div>
                         </li>
                         <li class="nav-item">@Html.ActionLink("評論區", "Index", "Comments", null, new { @class = "nav nav-link" })</li>
@@ -48,7 +48,10 @@
                     <!--<li class="nav-item">-->@*@Html.ActionLink("常見問題", "Index", "Home", null, new { @class = "nav nav-link" })*@<!--</li>-->
 
                     <li class="nav-item  ">@Html.ActionLink(str, action, "Login", null, new { @class = " btn btn-warning " })</li>
-                    <li class="nav-item ml-2 ">@Html.ActionLink("註冊", "Create", "Members", null, new { @class = " btn btn-primary " })</li>
+                    @if (Session["user"] == null)
+                    {
+                        <li class="nav-item ml-2 ">@Html.ActionLink("註冊", "Create", "Members", null, new { @class = " btn btn-primary " })</li>
+                    }
                 </ul>
 
 
